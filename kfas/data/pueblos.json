@@ -1,0 +1,42 @@
+[
+  {
+    "id": "prades",
+    "nombre": "Prades",
+    "descripcion": "Rincones de piedra roja y bosques de pino que perfuman el aire en la sierra de Prades.",
+    "distancia_km": 18,
+    "imagen_url": "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1200&q=80",
+    "latitud": 41.3089,
+    "longitud": 1.0183,
+    "fecha_creacion": "2024-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "besalu",
+    "nombre": "Besalú",
+    "descripcion": "Puentes medievales y calles empedradas que conectan historias entre el Fluvià y el campo.",
+    "distancia_km": 42,
+    "imagen_url": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
+    "latitud": 42.1983,
+    "longitud": 2.6975,
+    "fecha_creacion": "2024-01-02T10:00:00.000Z"
+  },
+  {
+    "id": "rupit",
+    "nombre": "Rupit i Pruit",
+    "descripcion": "Casas colgantes, pasarelas de madera y cascadas que guardan la calma del Collsacabra.",
+    "distancia_km": 56,
+    "imagen_url": "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=1200&q=80",
+    "latitud": 42.0242,
+    "longitud": 2.4665,
+    "fecha_creacion": "2024-01-03T10:00:00.000Z"
+  },
+  {
+    "id": "valldeflores",
+    "nombre": "Vall de Núria",
+    "descripcion": "Praderas verdes, cremallera y montañas suaves que abrazan romerías y tradiciones de altura.",
+    "distancia_km": 95,
+    "imagen_url": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1200&q=80",
+    "latitud": 42.3876,
+    "longitud": 2.162,
+    "fecha_creacion": "2024-01-04T10:00:00.000Z"
+  }
+]
