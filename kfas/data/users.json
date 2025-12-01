@@ -1,0 +1,10 @@
+[
+  {
+    "id": "admin",
+    "nombre": "Administrador",
+    "email": "admin@conectapueblos.com",
+    "password": "conecta123",
+    "pueblo": "Barcelona",
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  }
+]
