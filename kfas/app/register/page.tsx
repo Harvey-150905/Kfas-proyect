@@ -14,13 +14,17 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [pueblo, setPueblo] = useState("");
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
+    setIsSubmitting(true);
 
     if (password !== confirmPassword) {
       setError("Las contraseñas no coinciden");
+      setIsSubmitting(false);
       return;
     }
 
@@ -35,13 +39,21 @@ export default function RegisterPage() {
 
       if (!response.ok) {
         setError(payload?.error ?? "No se pudo crear la cuenta");
+        setIsSubmitting(false);
         return;
       }
 
-      router.push("/actividades");
+      setShowSuccess(true);
     } catch (error) {
       setError((error as Error).message);
+      setIsSubmitting(false);
     }
+    setIsSubmitting(false);
+  };
+
+  const handleCloseModal = () => {
+    setShowSuccess(false);
+    router.push(`/login?email=${encodeURIComponent(email)}`);
   };
 
   return (
@@ -177,14 +189,56 @@ export default function RegisterPage() {
 
               <button
                 type="submit"
-                className="w-full rounded-2xl bg-[#1e6fe3] px-4 py-3 text-base font-semibold text-white shadow-md transition hover:bg-[#155cc0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e6fe3]"
+                disabled={isSubmitting}
+                className="w-full rounded-2xl bg-[#1e6fe3] px-4 py-3 text-base font-semibold text-white shadow-md transition hover:bg-[#155cc0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e6fe3] disabled:cursor-not-allowed disabled:opacity-70"
               >
-                Crear cuenta
+                {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
               </button>
             </form>
           </section>
         </div>
       </main>
+
+      {showSuccess && (
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 px-4 py-8 backdrop-blur-sm">
+          <div className="w-full max-w-md rounded-3xl bg-white p-8 text-gray-800 shadow-2xl">
+            <div className="flex items-start gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                <svg
+                  aria-hidden
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-7 w-7"
+                >
+                  <path
+                    d="M5 13.5 9.5 18 19 6"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-xl font-semibold text-gray-900">Cuenta creada con éxito</h3>
+                <p className="text-sm leading-relaxed text-gray-700">
+                  Tu cuenta ha sido creada correctamente. Inicia sesión para continuar.
+                </p>
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                type="button"
+                onClick={handleCloseModal}
+                className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-emerald-700"
+              >
+                Ir a login
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
