@@ -128,6 +128,16 @@ export default function LoginPage() {
               >
                 Sign in
               </button>
+
+              <div className="mt-4 text-center text-sm text-gray-700">
+                ¿No tienes una cuenta?
+                <a
+                  href="/register"
+                  className="ml-1 font-semibold text-blue-600 hover:underline transition"
+                >
+                  Crear cuenta
+                </a>
+              </div>
             </form>
           </section>
         </div>
