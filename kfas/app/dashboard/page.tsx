@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
-import { usePueblos } from "../../../hooks/usePueblos";
-import type { Pueblo } from "../../../lib/pueblos";
+import { useRouter } from "next/navigation";
+import { usePueblos } from "../../hooks/usePueblos";
+import type { Pueblo } from "../../lib/pueblos";
 
 const backgroundClass = "bg-gradient-to-br from-[#f5f8f2] via-[#e9f2e2] to-[#d9e7cc]";
 
@@ -77,7 +78,17 @@ function PuebloCard({ pueblo }: { pueblo: Pueblo }) {
 }
 
 export default function DashboardPage() {
+  const router = useRouter();
   const { data: pueblos, loading, error } = usePueblos();
+
+  const handleJoin = () => {
+    const hasSession = document.cookie.includes("conecta_auth=");
+    if (hasSession) {
+      router.push("/login");
+      return;
+    }
+    router.push("/register");
+  };
 
   const content = useMemo(() => {
     if (loading) {
@@ -158,12 +169,13 @@ export default function DashboardPage() {
             ))}
           </nav>
 
-          <Link
-            href="#unete"
+          <button
+            type="button"
+            onClick={handleJoin}
             className="inline-flex items-center gap-2 rounded-full bg-[#88A97B] px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
           >
             Únete
-          </Link>
+          </button>
         </header>
 
         <main className="flex flex-col gap-12">
