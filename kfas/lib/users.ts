@@ -58,6 +58,12 @@ export async function findUserByEmail(email: string): Promise<User | undefined> 
   return users.find((user) => user.email.toLowerCase() === email.toLowerCase());
 }
 
+export async function findUserById(id: string): Promise<PublicUser | undefined> {
+  const users = await readData();
+  const user = users.find((entry) => entry.id === id);
+  return user ? toPublicUser(user) : undefined;
+}
+
 export async function createUser(input: CreateUserInput): Promise<PublicUser> {
   const users = await readData();
   const normalizedEmail = input.email.trim().toLowerCase();

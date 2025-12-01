@@ -21,14 +21,7 @@ export async function POST(request: Request) {
 
     const newUser = await createUser({ nombre, email, password, pueblo });
 
-    const response = NextResponse.json({ user: newUser }, { status: 201 });
-    response.cookies.set("conecta_auth", newUser.id, {
-      httpOnly: false,
-      path: "/",
-      maxAge: 60 * 60 * 24,
-    });
-
-    return response;
+    return NextResponse.json({ user: newUser }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: (error as Error).message }, { status: 500 });
   }
