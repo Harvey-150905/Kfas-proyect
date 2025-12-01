@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Conecta Pueblos | Login",
-  description: "Accede a la plataforma ConectaPueblos y conecta con las comunidades rurales.",
+  title: "Conecta Pueblos",
+  description: "Explora pueblos, conéctate con la comunidad rural y comparte nuevas actividades.",
 };
 
 export default function RootLayout({
