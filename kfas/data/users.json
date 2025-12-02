@@ -6,5 +6,13 @@
     "password": "conecta123",
     "pueblo": "Barcelona",
     "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "bddd7cf0-1101-429d-b9b2-82306e0b7a6c",
+    "nombre": "moose",
+    "email": "moose@gmail.com",
+    "password": "moose",
+    "pueblo": "Navas",
+    "createdAt": "2025-12-01T22:52:31.771Z"
   }
 ]

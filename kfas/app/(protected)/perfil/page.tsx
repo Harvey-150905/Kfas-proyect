@@ -5,7 +5,7 @@ import ProfileClient from "./profile-client";
 
 export default async function PerfilPage() {
   const cookieStore = cookies();
-  const session = cookieStore.get("conecta_auth");
+  const session = (await cookieStore).get("conecta_auth");
 
   if (!session) {
     redirect("/login");

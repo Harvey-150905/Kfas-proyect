@@ -4,7 +4,7 @@ import { findUserById } from "@/lib/users";
 
 export default async function ActividadesPage() {
   const cookieStore = cookies();
-  const session = cookieStore.get("conecta_auth");
+  const session = (await cookieStore).get("conecta_auth");
   const user = session?.value ? await findUserById(session.value) : undefined;
 
   return <ActivitiesClient user={user} />;

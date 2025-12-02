@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { PublicUser } from "@/lib/users";
+import { useRouter } from "next/navigation";
 
 type Activity = {
   id: string;
@@ -139,9 +140,31 @@ function initialsFromName(name: string) {
 
 function UserMenu({ user }: { user?: PublicUser }) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
   const avatarUrl = (user as { avatarUrl?: string | null } | undefined)?.avatarUrl;
   const displayName = user?.nombre ?? "Tu perfil";
   const initials = initialsFromName(displayName || "CP") || "CP";
+
+  const handleClick = (label: string) => {
+    setOpen(false);
+
+    switch (label) {
+      case "Perfil":
+        router.push("/perfil");
+        break;
+
+      case "Configuración":
+        router.push("/configuracion");
+        break;
+
+      case "Cerrar sesión":
+        // Borras cookie
+        document.cookie = "conecta_auth=; Max-Age=0; path=/;";
+        router.push("/login");
+        break;
+    }
+  };
 
   return (
     <div className="relative">
@@ -157,17 +180,19 @@ function UserMenu({ user }: { user?: PublicUser }) {
             initials
           )}
         </span>
+
         <span className="text-left leading-tight">
           <span className="block text-xs text-[#68836a]">Bienvenida/o</span>
           <span className="font-semibold text-[#243728]">{displayName}</span>
         </span>
+
         <svg
           aria-hidden
           viewBox="0 0 24 24"
           className={`h-4 w-4 text-[#5f7d53] transition ${open ? "rotate-180" : ""}`}
           fill="none"
         >
-          <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="1.5" />
         </svg>
       </button>
 
@@ -177,6 +202,7 @@ function UserMenu({ user }: { user?: PublicUser }) {
             <button
               key={label}
               type="button"
+              onClick={() => handleClick(label)}
               className="flex w-full items-center justify-between px-4 py-3 text-sm font-medium text-[#2f4332] transition hover:bg-[#f2f6f0]"
             >
               <span>{label}</span>
@@ -188,7 +214,6 @@ function UserMenu({ user }: { user?: PublicUser }) {
     </div>
   );
 }
-
 function ActivityCard({ actividad }: { actividad: Activity }) {
   return (
     <article className="group overflow-hidden rounded-[26px] border border-[#e2eadf] bg-white shadow-[0_22px_75px_-52px_rgba(36,55,40,0.65)] transition hover:-translate-y-1 hover:shadow-[0_30px_110px_-60px_rgba(36,55,40,0.7)]">
