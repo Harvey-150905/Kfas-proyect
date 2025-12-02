@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -44,6 +45,10 @@ export default function RegisterPage() {
       }
 
       setShowSuccess(true);
+
+      setTimeout(() => {
+        router.push(`/login?email=${encodeURIComponent(email)}&registered=1`);
+      }, 1400);
     } catch (error) {
       setError((error as Error).message);
       setIsSubmitting(false);
@@ -53,7 +58,7 @@ export default function RegisterPage() {
 
   const handleCloseModal = () => {
     setShowSuccess(false);
-    router.push(`/login?email=${encodeURIComponent(email)}`);
+    router.push(`/login?email=${encodeURIComponent(email)}&registered=1`);
   };
 
   return (
@@ -61,22 +66,22 @@ export default function RegisterPage() {
       className="relative min-h-screen w-full bg-cover bg-center"
       style={{ backgroundImage: `url(${backgroundUrl})` }}
     >
-      <div className="absolute inset-0 bg-white/5" aria-hidden />
+      <div className="absolute inset-0 bg-white/10" aria-hidden />
 
-      <main className="relative z-10 flex min-h-screen items-center justify-center px-4 py-12">
-        <div className="w-full max-w-xl rounded-[28px] bg-white/90 p-10 shadow-2xl backdrop-blur-sm sm:p-14">
-          <header className="mb-8 flex flex-col items-center gap-3 text-center text-gray-800">
+      <main className="relative z-10 flex min-h-screen items-center justify-center px-4 py-12 sm:py-16">
+        <div className="w-full max-w-[440px] rounded-[24px] bg-white/92 p-7 shadow-2xl backdrop-blur-md sm:max-w-[480px] sm:p-9">
+          <header className="mb-5 flex flex-col items-center gap-3 text-center text-gray-800 sm:mb-6">
             <div className="flex flex-col items-center gap-3">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 shadow-inner">
                 <svg
                   aria-hidden
                   viewBox="0 0 64 64"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-10 w-10 text-emerald-600"
+                  className="h-9 w-9 text-emerald-600"
                 >
                   <path
-                    d="M14 36c4-8 16-8 20 0m16 0c-4-8-16-8-20 0m-6-14a6 6 0 11-12 0 6 6 0 0112 0Zm28 0a6 6 0 11-12 0 6 0 0112 0Zm-14-4a6 6 0 11-12 0 6 0 0112 0Z"
+                    d="M14 36c4-8 16-8 20 0m16 0c-4-8-16-8-20 0m-6-14a6 6 0 11-12 0 6 6 0 0112 0Zm28 0a6 6 0 11-12 0 6 0 0112 0Zm-14-4a6 6 0 11-12 0 6 6 0 0112 0Z"
                     stroke="currentColor"
                     strokeWidth="3"
                     strokeLinecap="round"
@@ -102,7 +107,7 @@ export default function RegisterPage() {
               <h2 className="text-2xl font-semibold text-gray-900">Crea tu cuenta</h2>
             </div>
 
-            <form className="space-y-5" onSubmit={handleSubmit}>
+            <form className="space-y-5 overflow-y-auto rounded-[18px] bg-white/60 p-4 shadow-inner max-h-[70vh]" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700" htmlFor="nombre">
                   Nombre
@@ -114,7 +119,7 @@ export default function RegisterPage() {
                   required
                   value={nombre}
                   onChange={(event) => setNombre(event.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
                   placeholder="Tu nombre"
                 />
               </div>
@@ -131,7 +136,7 @@ export default function RegisterPage() {
                   required
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
                   placeholder="you@example.com"
                 />
               </div>
@@ -148,7 +153,7 @@ export default function RegisterPage() {
                   required
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
                   placeholder="••••••••"
                 />
               </div>
@@ -165,7 +170,7 @@ export default function RegisterPage() {
                   required
                   value={confirmPassword}
                   onChange={(event) => setConfirmPassword(event.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
                   placeholder="••••••••"
                 />
               </div>
@@ -180,7 +185,7 @@ export default function RegisterPage() {
                   type="text"
                   value={pueblo}
                   onChange={(event) => setPueblo(event.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
                   placeholder="Ej. Prades"
                 />
               </div>
@@ -190,52 +195,33 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full rounded-2xl bg-[#1e6fe3] px-4 py-3 text-base font-semibold text-white shadow-md transition hover:bg-[#155cc0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e6fe3] disabled:cursor-not-allowed disabled:opacity-70"
+                className="w-full rounded-2xl bg-[#2e8b57] px-4 py-2.5 text-base font-semibold text-white shadow-md transition hover:bg-[#256f45] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2e8b57] disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
               </button>
+              <p className="text-center text-sm text-gray-700">
+                ¿Ya tienes cuenta?{" "}
+                <Link href="/login" className="font-semibold text-emerald-700 underline-offset-4 hover:underline">
+                  Inicia sesión
+                </Link>
+              </p>
             </form>
           </section>
         </div>
       </main>
 
       {showSuccess && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 px-4 py-8 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-3xl bg-white p-8 text-gray-800 shadow-2xl">
-            <div className="flex items-start gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                <svg
-                  aria-hidden
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7"
-                >
-                  <path
-                    d="M5 13.5 9.5 18 19 6"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-xl font-semibold text-gray-900">Cuenta creada con éxito</h3>
-                <p className="text-sm leading-relaxed text-gray-700">
-                  Tu cuenta ha sido creada correctamente. Inicia sesión para continuar.
-                </p>
-              </div>
-            </div>
-            <div className="mt-6 flex justify-end">
-              <button
-                type="button"
-                onClick={handleCloseModal}
-                className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-emerald-700"
-              >
-                Ir a login
-              </button>
-            </div>
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/35 px-4">
+          <div className="w-full max-w-md rounded-3xl bg-white/95 p-6 text-center shadow-2xl backdrop-blur">
+            <h3 className="text-xl font-semibold text-emerald-700">Cuenta creada con éxito</h3>
+            <p className="mt-2 text-sm text-gray-700">Redirigiendo para que inicies sesión...</p>
+            <button
+              type="button"
+              onClick={handleCloseModal}
+              className="mt-4 w-full rounded-2xl bg-[#2e8b57] px-4 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#256f45]"
+            >
+              Ir al login ahora
+            </button>
           </div>
         </div>
       )}
