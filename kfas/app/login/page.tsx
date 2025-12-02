@@ -11,6 +11,7 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const prefillEmail = useMemo(() => searchParams.get("email") ?? "", [searchParams]);
+  const registeredRecently = useMemo(() => searchParams.get("registered") === "1", [searchParams]);
   const [email, setEmail] = useState(prefillEmail);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -83,6 +84,9 @@ export default function LoginPage() {
           <section className="space-y-6 text-gray-800">
             <div className="text-center">
               <h2 className="text-2xl font-semibold text-gray-900">Login</h2>
+              {registeredRecently && (
+                <p className="mt-2 text-sm font-medium text-emerald-700">Inicia sesión con tu nueva cuenta</p>
+              )}
             </div>
 
             <form className="space-y-5" onSubmit={handleSubmit}>
