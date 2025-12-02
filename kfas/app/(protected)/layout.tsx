@@ -7,7 +7,7 @@ export default async function ProtectedLayout({ children }: { children: ReactNod
   const session = cookieStore.get("conecta_auth");
 
   if (!session && process.env.ALLOW_UNAUTH_VIEW !== "true") {
-    redirect("/");
+    redirect("/login");
   }
 
   return <>{children}</>;
