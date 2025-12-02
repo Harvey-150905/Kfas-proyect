@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -67,9 +68,9 @@ export default function RegisterPage() {
     >
       <div className="absolute inset-0 bg-white/10" aria-hidden />
 
-      <main className="relative z-10 flex min-h-screen items-center justify-center px-4 py-16 sm:py-20">
-        <div className="w-full max-w-md rounded-[24px] bg-white/92 p-8 shadow-2xl backdrop-blur-md sm:max-w-lg sm:p-12">
-          <header className="mb-6 flex flex-col items-center gap-3 text-center text-gray-800 sm:mb-8">
+      <main className="relative z-10 flex min-h-screen items-center justify-center px-4 py-12 sm:py-16">
+        <div className="w-full max-w-[440px] rounded-[24px] bg-white/92 p-7 shadow-2xl backdrop-blur-md sm:max-w-[480px] sm:p-9">
+          <header className="mb-5 flex flex-col items-center gap-3 text-center text-gray-800 sm:mb-6">
             <div className="flex flex-col items-center gap-3">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 shadow-inner">
                 <svg
@@ -106,7 +107,7 @@ export default function RegisterPage() {
               <h2 className="text-2xl font-semibold text-gray-900">Crea tu cuenta</h2>
             </div>
 
-            <form className="space-y-5" onSubmit={handleSubmit}>
+            <form className="space-y-5 overflow-y-auto rounded-[18px] bg-white/60 p-4 shadow-inner max-h-[70vh]" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700" htmlFor="nombre">
                   Nombre
@@ -194,10 +195,16 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full rounded-2xl bg-[#2e8b57] px-4 py-3 text-base font-semibold text-white shadow-md transition hover:bg-[#256f45] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2e8b57] disabled:cursor-not-allowed disabled:opacity-70"
+                className="w-full rounded-2xl bg-[#2e8b57] px-4 py-2.5 text-base font-semibold text-white shadow-md transition hover:bg-[#256f45] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2e8b57] disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
               </button>
+              <p className="text-center text-sm text-gray-700">
+                ¿Ya tienes cuenta?{" "}
+                <Link href="/login" className="font-semibold text-emerald-700 underline-offset-4 hover:underline">
+                  Inicia sesión
+                </Link>
+              </p>
             </form>
           </section>
         </div>

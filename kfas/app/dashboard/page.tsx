@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { usePueblos } from "../../hooks/usePueblos";
 import type { Pueblo } from "../../lib/pueblos";
 
-const backgroundClass = "bg-gradient-to-br from-[#f9fbf8] via-white to-[#eff4ee]";
+const backgroundClass = "bg-gradient-to-b from-[#f9faf8] via-white to-[#f4f6f4]";
 
 function formatDistance(pueblo: Pueblo) {
   if (pueblo.distancia_km === null || pueblo.distancia_km === undefined) return "Distancia no disponible";
@@ -17,9 +17,9 @@ function formatDistance(pueblo: Pueblo) {
 function HeroBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(136,169,123,0.25),_transparent_45%),_radial-gradient(circle_at_80%_10%,_rgba(207,227,196,0.35),_transparent_35%),_radial-gradient(circle_at_50%_70%,_rgba(136,169,123,0.2),_transparent_45%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(136,169,123,0.16),_transparent_42%),_radial-gradient(circle_at_80%_12%,_rgba(207,227,196,0.25),_transparent_34%),_radial-gradient(circle_at_50%_70%,_rgba(136,169,123,0.12),_transparent_42%)]" />
       <svg
-        className="absolute -bottom-10 right-[-120px] h-[360px] w-[560px] opacity-60"
+        className="absolute -bottom-16 right-[-120px] h-[320px] w-[520px] opacity-45"
         viewBox="0 0 600 400"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -119,8 +119,8 @@ export default function DashboardPage() {
   return (
     <div className={`relative min-h-screen ${backgroundClass} text-[#2f422a]`}>
       <HeroBackground />
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-16 pt-8 sm:px-6 lg:px-8">
-        <header className="mb-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white/85 px-5 py-4 shadow-[0_15px_50px_-34px_rgba(68,99,68,0.55)] backdrop-blur">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1400px] flex-col px-4 pb-16 pt-8 sm:px-6 lg:px-10 xl:px-12">
+        <header className="mb-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white/90 px-5 py-4 shadow-[0_15px_50px_-34px_rgba(68,99,68,0.45)] backdrop-blur">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#88A97B] to-[#6f8c64] text-white shadow-md">
               <svg
@@ -179,10 +179,10 @@ export default function DashboardPage() {
         </header>
 
         <main className="flex flex-col gap-10 sm:gap-12">
-          <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/90 via-white to-[#f2f6f1] p-8 shadow-[0_18px_70px_-36px_rgba(68,99,68,0.55)] backdrop-blur-sm sm:p-10">
+          <section className="relative overflow-hidden rounded-3xl bg-white/95 p-8 shadow-[0_18px_70px_-44px_rgba(68,99,68,0.4)] ring-1 ring-[#e4ecdf] backdrop-blur-sm sm:p-10">
             <div className="absolute -left-12 top-8 h-24 w-24 rounded-full bg-[#d9e7d2] blur-3xl" aria-hidden />
             <div className="absolute -right-14 -bottom-12 h-32 w-32 rounded-full bg-[#88A97B]/30 blur-3xl" aria-hidden />
-            <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            <div className="relative grid gap-8 lg:grid-cols-[1.35fr_0.75fr] lg:items-center">
               <div className="space-y-6">
                 <p className="text-sm uppercase tracking-[0.24em] text-[#6f8c64]">Comunidad viva</p>
                 <h1 className="text-4xl font-bold leading-tight text-[#2f422a] sm:text-5xl">
@@ -222,18 +222,18 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          <section id="pueblos" className="space-y-4">
+          <section id="pueblos" className="space-y-5">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <p className="text-sm uppercase tracking-[0.24em] text-[#6f8c64]">Pueblos</p>
-                <h2 className="text-2xl font-semibold text-[#2f422a]">Explora comunidades activas</h2>
+                <h2 className="text-3xl font-semibold text-[#243728] leading-tight">Explora comunidades activas</h2>
               </div>
               <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-2 text-xs font-medium text-[#446347] shadow-sm">
                 <span className="inline-block h-2 w-2 rounded-full bg-[#88A97B]" aria-hidden />
                 Datos conectados en tiempo real
               </div>
             </div>
-            {content}
+            <div className="lg:pl-2 xl:pl-4">{content}</div>
           </section>
         </main>
       </div>

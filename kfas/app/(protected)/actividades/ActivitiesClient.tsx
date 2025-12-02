@@ -191,43 +191,43 @@ function UserMenu({ user }: { user?: PublicUser }) {
 
 function ActivityCard({ actividad }: { actividad: Activity }) {
   return (
-    <article className="group overflow-hidden rounded-3xl border border-[#e2eadf] bg-white shadow-[0_18px_70px_-48px_rgba(36,55,40,0.55)] transition hover:-translate-y-1 hover:shadow-[0_26px_90px_-52px_rgba(36,55,40,0.6)]">
-      <div className="relative h-64 w-full">
+    <article className="group overflow-hidden rounded-[26px] border border-[#e2eadf] bg-white shadow-[0_22px_75px_-52px_rgba(36,55,40,0.65)] transition hover:-translate-y-1 hover:shadow-[0_30px_110px_-60px_rgba(36,55,40,0.7)]">
+      <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-[4/3]">
         <Image
           src={actividad.imagen}
           alt={actividad.titulo}
           fill
-          sizes="(min-width: 1024px) 55vw, 100vw"
-          className="object-cover transition duration-500 group-hover:scale-105"
+          sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 60vw, 100vw"
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           priority={false}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1f2f23]/70 via-transparent" />
-        <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[#2f4332] shadow">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#142118]/75 via-[#111b14]/20 to-transparent" />
+        <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-[#2f4332] shadow-md">
           <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#89a67e]" aria-hidden />
           {actividad.categoria}
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 px-5 py-5 sm:px-6">
-        <div className="flex items-start gap-3">
+      <div className="flex flex-col gap-5 px-5 py-6 sm:px-7 sm:py-7">
+        <div className="flex items-start gap-3 sm:gap-4">
           <div className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-white/90 shadow-md">
             <Image src={actividad.avatar} alt={actividad.organizador} fill className="object-cover" />
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <p className="text-xs uppercase tracking-[0.16em] text-[#6b8568]">
               {actividad.fecha} · {actividad.hora}
             </p>
             <h3 className="text-xl font-semibold text-[#1f3024]">{actividad.titulo}</h3>
-            <p className="text-sm leading-relaxed text-[#304635] opacity-90">{actividad.descripcion}</p>
+            <p className="min-h-[72px] text-sm leading-relaxed text-[#304635] opacity-90">{actividad.descripcion}</p>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 rounded-2xl bg-[#f3f7f0] px-4 py-3 text-sm text-[#2c3f30] sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-3">
-            <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#89a67e] to-[#5f7d53] text-sm font-semibold text-white shadow-md">
+        <div className="flex flex-col gap-3 rounded-2xl bg-[#f3f7f0] px-4 py-3 text-sm text-[#2c3f30] shadow-inner sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[#89a67e] to-[#5f7d53] text-sm font-semibold text-white shadow-md">
               {initialsFromName(actividad.organizador)}
             </div>
-            <div>
+            <div className="space-y-0.5">
               <p className="font-semibold">{actividad.organizador}</p>
               <p className="text-xs text-[#5b755b]">{actividad.lugar}</p>
             </div>
@@ -251,10 +251,10 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
   const [statusFilter] = useState("Todo");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f9fbf8] via-white to-[#eef3ed] text-[#253829]">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:px-8">
+    <div className="min-h-screen bg-[#f8f9f8] text-[#253829]">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:px-10 xl:max-w-[1280px] xl:px-12">
         <aside className="hidden w-[280px] shrink-0 space-y-4 lg:block">
-          <div className="overflow-hidden rounded-[26px] bg-white/80 p-5 shadow-[0_25px_80px_-60px_rgba(42,74,41,0.55)] backdrop-blur">
+          <div className="overflow-hidden rounded-[26px] bg-white/85 p-5 shadow-[0_25px_80px_-60px_rgba(42,74,41,0.55)] backdrop-blur">
             <div className="mb-4 flex items-center gap-3 rounded-2xl bg-[#ecf3e9] px-3 py-2">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#89a67e] to-[#5f7d53] text-sm font-semibold text-white shadow-md">
                 CP
@@ -281,7 +281,7 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
             </nav>
           </div>
 
-          <div className="overflow-hidden rounded-[26px] bg-white/80 p-5 shadow-[0_25px_80px_-60px_rgba(42,74,41,0.55)] backdrop-blur">
+          <div className="overflow-hidden rounded-[26px] bg-white/85 p-5 shadow-[0_25px_80px_-60px_rgba(42,74,41,0.55)] backdrop-blur">
             <div className="mb-3 flex items-center justify-between">
               <h3 className="text-sm font-semibold text-[#2c3f30]">Tus pueblos</h3>
               <span className="rounded-full bg-[#e3eddf] px-3 py-1 text-xs font-semibold text-[#5f7d53]">Conectados</span>
@@ -303,8 +303,8 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
           </div>
         </aside>
 
-        <section className="flex-1 space-y-5">
-          <header className="flex flex-col gap-3 rounded-[26px] bg-white/80 px-5 py-4 shadow-[0_25px_90px_-60px_rgba(42,74,41,0.55)] backdrop-blur md:flex-row md:items-center md:justify-between">
+        <section className="flex-1 space-y-6">
+          <header className="flex flex-col gap-3 rounded-[26px] bg-white/90 px-5 py-4 shadow-[0_25px_90px_-60px_rgba(42,74,41,0.5)] backdrop-blur md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#89a67e] to-[#5f7d53] text-lg font-semibold text-white shadow-md">
                 CP
@@ -374,9 +374,9 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
             </div>
           </header>
 
-          <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="space-y-4">
-              <div className="flex flex-col gap-2 rounded-[26px] border border-dashed border-[#c8d8c2] bg-white/60 px-5 py-4 text-sm text-[#304635] shadow-[0_10px_50px_-40px_rgba(42,74,41,0.6)]">
+          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.9fr]">
+            <div className="space-y-5">
+              <div className="flex flex-col gap-3 rounded-[26px] border border-dashed border-[#c8d8c2] bg-white/70 px-5 py-5 text-sm text-[#304635] shadow-[0_10px_50px_-40px_rgba(42,74,41,0.6)]">
                 <p className="font-semibold text-[#2c3f30]">Comparte algo con tu gente</p>
                 <div className="flex flex-wrap gap-2 text-xs font-medium text-[#5b755b]">
                   <span className="rounded-full bg-[#ecf3e9] px-3 py-1">Anuncio rápido</span>
@@ -386,24 +386,24 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
               </div>
 
               <div className="flex items-center justify-between px-1">
-                <h2 className="text-lg font-semibold text-[#243728]">Actividades destacadas</h2>
+                <h2 className="text-xl font-semibold text-[#243728]">Actividades destacadas</h2>
                 <button className="rounded-full bg-[#e4eee0] px-4 py-2 text-xs font-semibold text-[#2f4332] transition hover:-translate-y-0.5 hover:shadow-md">
                   Crear actividad
                 </button>
               </div>
 
-              <div className="grid gap-4">
+              <div className="grid gap-5">
                 {featured.map((actividad) => (
                   <ActivityCard key={actividad.id} actividad={actividad} />
                 ))}
               </div>
 
-              <div className="rounded-[26px] bg-white/85 p-5 shadow-[0_25px_90px_-60px_rgba(42,74,41,0.5)]">
+              <div className="rounded-[26px] bg-white/90 p-5 shadow-[0_25px_90px_-60px_rgba(42,74,41,0.5)]">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-[#243728]">Más planes para ti</h3>
                   <span className="rounded-full bg-[#e3eddf] px-3 py-1 text-xs font-semibold text-[#5f7d53]">{statusFilter}</span>
                 </div>
-                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <div className="mt-4 grid gap-5 sm:grid-cols-2">
                   {activities.map((actividad) => (
                     <ActivityCard key={`${actividad.id}-extra`} actividad={actividad} />
                   ))}
@@ -411,11 +411,11 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
               </div>
             </div>
 
-            <aside className="space-y-4">
-              <div className="overflow-hidden rounded-[26px] bg-white/90 p-5 shadow-[0_25px_90px_-60px_rgba(42,74,41,0.5)]">
+            <aside className="space-y-5">
+              <div className="overflow-hidden rounded-[26px] bg-white/92 p-5 shadow-[0_25px_90px_-60px_rgba(42,74,41,0.5)]">
                 <p className="text-xs uppercase tracking-[0.16em] text-[#6f8b66]">Organiza</p>
                 <h3 className="text-lg font-semibold text-[#243728]">Comparte tu próxima actividad</h3>
-                <p className="mt-2 text-sm text-[#304635]">
+                <p className="mt-2 text-sm text-[#304635] leading-relaxed">
                   Describe tu idea, añade fecha, hora y el pueblo anfitrión. La comunidad podrá sumarse al instante.
                 </p>
                 <button className="mt-4 w-full rounded-full bg-gradient-to-r from-[#89a67e] to-[#5f7d53] px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl">
@@ -423,23 +423,23 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
                 </button>
               </div>
 
-              <div className="overflow-hidden rounded-[26px] bg-white/90 p-5 shadow-[0_25px_90px_-60px_rgba(42,74,41,0.5)]">
+              <div className="overflow-hidden rounded-[26px] bg-white/92 p-5 shadow-[0_25px_90px_-60px_rgba(42,74,41,0.5)]">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-[#243728]">Recordatorios</h3>
                   <span className="rounded-full bg-[#e3eddf] px-3 py-1 text-xs font-semibold text-[#5f7d53]">Esta semana</span>
                 </div>
                 <ul className="mt-4 space-y-3 text-sm text-[#304635]">
-                  <li className="flex items-start gap-3 rounded-2xl bg-[#f1f6ef] px-4 py-3">
+                  <li className="flex items-start gap-3 rounded-2xl bg-[#f1f6ef] px-4 py-3 shadow-inner">
                     <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[#89a67e]" aria-hidden />
-                    <div>
-                      <p className="font-semibold">Confirmar materiales para el huerto</p>
+                    <div className="space-y-1">
+                      <p className="font-semibold leading-snug">Confirmar materiales para el huerto</p>
                       <p className="text-xs text-[#5b755b]">Viernes 18:00 · Canal Conecta Agro</p>
                     </div>
                   </li>
-                  <li className="flex items-start gap-3 rounded-2xl bg-[#f1f6ef] px-4 py-3">
+                  <li className="flex items-start gap-3 rounded-2xl bg-[#f1f6ef] px-4 py-3 shadow-inner">
                     <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[#89a67e]" aria-hidden />
-                    <div>
-                      <p className="font-semibold">Compartir fotos del taller de bordado</p>
+                    <div className="space-y-1">
+                      <p className="font-semibold leading-snug">Compartir fotos del taller de bordado</p>
                       <p className="text-xs text-[#5b755b]">Domingo 20:00 · Mensajes</p>
                     </div>
                   </li>
