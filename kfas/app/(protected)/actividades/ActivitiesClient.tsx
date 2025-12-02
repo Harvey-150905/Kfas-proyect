@@ -157,9 +157,9 @@ function UserMenu({ user }: { user?: PublicUser }) {
             initials
           )}
         </span>
-        <span className="hidden text-left leading-tight sm:block">
+        <span className="text-left leading-tight">
           <span className="block text-xs text-[#68836a]">Bienvenida/o</span>
-          <span>{displayName}</span>
+          <span className="font-semibold text-[#243728]">{displayName}</span>
         </span>
         <svg
           aria-hidden
@@ -191,7 +191,7 @@ function UserMenu({ user }: { user?: PublicUser }) {
 
 function ActivityCard({ actividad }: { actividad: Activity }) {
   return (
-    <article className="group overflow-hidden rounded-[26px] border border-[#e6eee2] bg-white/90 shadow-[0_25px_90px_-50px_rgba(42,74,41,0.5)] transition hover:-translate-y-1 hover:shadow-[0_40px_110px_-60px_rgba(42,74,41,0.55)]">
+    <article className="group overflow-hidden rounded-3xl border border-[#e2eadf] bg-white shadow-[0_18px_70px_-48px_rgba(36,55,40,0.55)] transition hover:-translate-y-1 hover:shadow-[0_26px_90px_-52px_rgba(36,55,40,0.6)]">
       <div className="relative h-64 w-full">
         <Image
           src={actividad.imagen}
@@ -251,8 +251,8 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
   const [statusFilter] = useState("Todo");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f2f6ef] via-[#e7f1e4] to-[#dce6d7] text-[#253829]">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 lg:flex-row lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#f9fbf8] via-white to-[#eef3ed] text-[#253829]">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:px-8">
         <aside className="hidden w-[280px] shrink-0 space-y-4 lg:block">
           <div className="overflow-hidden rounded-[26px] bg-white/80 p-5 shadow-[0_25px_80px_-60px_rgba(42,74,41,0.55)] backdrop-blur">
             <div className="mb-4 flex items-center gap-3 rounded-2xl bg-[#ecf3e9] px-3 py-2">

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { usePueblos } from "../../hooks/usePueblos";
 import type { Pueblo } from "../../lib/pueblos";
 
-const backgroundClass = "bg-gradient-to-br from-[#f5f8f2] via-[#e9f2e2] to-[#d9e7cc]";
+const backgroundClass = "bg-gradient-to-br from-[#f9fbf8] via-white to-[#eff4ee]";
 
 function formatDistance(pueblo: Pueblo) {
   if (pueblo.distancia_km === null || pueblo.distancia_km === undefined) return "Distancia no disponible";
@@ -43,7 +43,7 @@ function HeroBackground() {
 
 function PuebloCard({ pueblo }: { pueblo: Pueblo }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-3xl border border-[#c7d8c1] bg-white/80 shadow-[0_20px_70px_-40px_rgba(68,99,68,0.4)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_25px_80px_-40px_rgba(68,99,68,0.55)]">
+    <article className="group flex flex-col overflow-hidden rounded-[22px] border border-[#d6e2cf] bg-white/90 shadow-[0_18px_60px_-38px_rgba(55,84,55,0.45)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_26px_90px_-44px_rgba(55,84,55,0.52)]">
       <div className="relative h-52 overflow-hidden">
         <Image
           src={pueblo.imagen_url}
@@ -119,8 +119,8 @@ export default function DashboardPage() {
   return (
     <div className={`relative min-h-screen ${backgroundClass} text-[#2f422a]`}>
       <HeroBackground />
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col px-4 pb-16 pt-8 sm:px-8">
-        <header className="mb-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white/80 px-6 py-4 shadow-[0_15px_50px_-30px_rgba(68,99,68,0.6)] backdrop-blur">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+        <header className="mb-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white/85 px-5 py-4 shadow-[0_15px_50px_-34px_rgba(68,99,68,0.55)] backdrop-blur">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#88A97B] to-[#6f8c64] text-white shadow-md">
               <svg
@@ -152,7 +152,7 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <nav className="flex flex-1 items-center justify-center gap-6 text-sm font-medium text-[#3f5c37]">
+          <nav className="flex flex-1 items-center justify-center gap-4 text-sm font-medium text-[#3f5c37] sm:gap-6">
             {[
               { href: "#", label: "Inicio" },
               { href: "#pueblos", label: "Pueblos" },
@@ -178,11 +178,11 @@ export default function DashboardPage() {
           </button>
         </header>
 
-        <main className="flex flex-col gap-12">
-          <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/85 via-white/70 to-[#eef5e7] p-10 shadow-[0_20px_80px_-40px_rgba(68,99,68,0.55)] backdrop-blur">
-            <div className="absolute -left-20 top-10 h-32 w-32 rounded-full bg-[#cfe3c4] blur-3xl" aria-hidden />
-            <div className="absolute -right-10 -bottom-14 h-40 w-40 rounded-full bg-[#88A97B] opacity-50 blur-3xl" aria-hidden />
-            <div className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <main className="flex flex-col gap-10 sm:gap-12">
+          <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/90 via-white to-[#f2f6f1] p-8 shadow-[0_18px_70px_-36px_rgba(68,99,68,0.55)] backdrop-blur-sm sm:p-10">
+            <div className="absolute -left-12 top-8 h-24 w-24 rounded-full bg-[#d9e7d2] blur-3xl" aria-hidden />
+            <div className="absolute -right-14 -bottom-12 h-32 w-32 rounded-full bg-[#88A97B]/30 blur-3xl" aria-hidden />
+            <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
               <div className="space-y-6">
                 <p className="text-sm uppercase tracking-[0.24em] text-[#6f8c64]">Comunidad viva</p>
                 <h1 className="text-4xl font-bold leading-tight text-[#2f422a] sm:text-5xl">
