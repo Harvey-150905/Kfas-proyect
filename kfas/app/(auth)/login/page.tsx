@@ -4,9 +4,6 @@ import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
-const backgroundUrl =
-  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000&q=80";
-
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -41,14 +38,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div
-      className="relative min-h-screen w-full bg-cover bg-center"
-      style={{ backgroundImage: `url(${backgroundUrl})` }}
-    >
-      <div className="absolute inset-0 bg-white/5" aria-hidden />
-
-      <main className="relative z-10 flex min-h-screen items-center justify-center px-4 py-12">
-        <div className="w-full max-w-xl rounded-[28px] bg-white/90 p-10 shadow-2xl backdrop-blur-sm sm:p-14">
+    <div className="relative min-h-screen w-full">
+      <main className="relative z-10 flex min-h-screen items-center justify-center px-4 py-10 sm:py-14">
+        <div className="w-full max-w-xl rounded-[28px] bg-white/95 p-10 shadow-2xl ring-1 ring-[#e5ede2] backdrop-blur-sm sm:p-12">
           <header className="mb-8 flex flex-col items-center gap-3 text-center text-gray-800">
             <div className="flex flex-col items-center gap-3">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
