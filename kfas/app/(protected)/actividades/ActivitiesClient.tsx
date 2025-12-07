@@ -251,7 +251,7 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
   const [statusFilter] = useState("Todo");
 
   return (
-    <div className="min-h-screen bg-[#f8f9f8] text-[#253829]">
+    <div className="min-h-screen bg-[#f9f9f9] text-[#253829]">
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:px-10 xl:max-w-[1280px] xl:px-12">
         <aside className="hidden w-[280px] shrink-0 space-y-4 lg:block">
           <div className="overflow-hidden rounded-[26px] bg-white/85 p-5 shadow-[0_25px_80px_-60px_rgba(42,74,41,0.55)] backdrop-blur">
