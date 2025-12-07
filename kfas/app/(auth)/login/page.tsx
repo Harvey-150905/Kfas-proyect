@@ -4,7 +4,7 @@ import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
-  export default function LoginPage() {
+export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const prefillEmail = useMemo(() => searchParams.get("email") ?? "", [searchParams]);
