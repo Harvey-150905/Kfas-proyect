@@ -191,7 +191,7 @@ function UserMenu({ user }: { user?: PublicUser }) {
 
 function ActivityCard({ actividad }: { actividad: Activity }) {
   return (
-    <article className="group overflow-hidden rounded-[26px] border border-[#e2eadf] bg-white shadow-[0_22px_75px_-52px_rgba(36,55,40,0.65)] transition hover:-translate-y-1 hover:shadow-[0_30px_110px_-60px_rgba(36,55,40,0.7)]">
+    <article className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-[#e2eadf] bg-white shadow-[0_22px_75px_-52px_rgba(36,55,40,0.65)] transition hover:-translate-y-1 hover:shadow-[0_30px_110px_-60px_rgba(36,55,40,0.7)]">
       <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-[4/3]">
         <Image
           src={actividad.imagen}
@@ -208,7 +208,7 @@ function ActivityCard({ actividad }: { actividad: Activity }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-5 px-5 py-6 sm:px-7 sm:py-7">
+      <div className="flex flex-1 flex-col gap-4 px-5 py-5 sm:px-6 sm:py-6">
         <div className="flex items-start gap-3 sm:gap-4">
           <div className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-white/90 shadow-md">
             <Image src={actividad.avatar} alt={actividad.organizador} fill className="object-cover" />
@@ -217,8 +217,8 @@ function ActivityCard({ actividad }: { actividad: Activity }) {
             <p className="text-xs uppercase tracking-[0.16em] text-[#6b8568]">
               {actividad.fecha} · {actividad.hora}
             </p>
-            <h3 className="text-xl font-semibold text-[#1f3024]">{actividad.titulo}</h3>
-            <p className="min-h-[72px] text-sm leading-relaxed text-[#304635] opacity-90">{actividad.descripcion}</p>
+            <h3 className="text-xl font-semibold text-[#1f3024] line-clamp-2">{actividad.titulo}</h3>
+            <p className="text-sm leading-relaxed text-[#304635] opacity-90 line-clamp-3">{actividad.descripcion}</p>
           </div>
         </div>
 
@@ -251,7 +251,7 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
   const [statusFilter] = useState("Todo");
 
   return (
-    <div className="min-h-screen bg-[#f8f9f8] text-[#253829]">
+    <div className="min-h-screen bg-[#f9f9f9] text-[#253829]">
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:px-10 xl:max-w-[1280px] xl:px-12">
         <aside className="hidden w-[280px] shrink-0 space-y-4 lg:block">
           <div className="overflow-hidden rounded-[26px] bg-white/85 p-5 shadow-[0_25px_80px_-60px_rgba(42,74,41,0.55)] backdrop-blur">
@@ -403,7 +403,7 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
                   <h3 className="text-lg font-semibold text-[#243728]">Más planes para ti</h3>
                   <span className="rounded-full bg-[#e3eddf] px-3 py-1 text-xs font-semibold text-[#5f7d53]">{statusFilter}</span>
                 </div>
-                <div className="mt-4 grid gap-5 sm:grid-cols-2">
+                <div className="mt-4 grid gap-5 sm:grid-cols-1 md:grid-cols-2">
                   {activities.map((actividad) => (
                     <ActivityCard key={`${actividad.id}-extra`} actividad={actividad} />
                   ))}
