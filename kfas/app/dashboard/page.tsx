@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { usePueblos } from "../../hooks/usePueblos";
 import type { Pueblo } from "../../lib/pueblos";
 
-const backgroundClass = "bg-gradient-to-b from-[#f9faf8] via-white to-[#f4f6f4]";
+const backgroundClass = "bg-gradient-to-b from-[#fbfbfb] via-white to-[#f5f5f5]";
 
 function formatDistance(pueblo: Pueblo) {
   if (pueblo.distancia_km === null || pueblo.distancia_km === undefined) return "Distancia no disponible";
@@ -64,7 +64,7 @@ function PuebloCard({ pueblo }: { pueblo: Pueblo }) {
           <h3 className="text-xl font-semibold text-[#2f422a]">{pueblo.nombre}</h3>
           <span className="text-xs uppercase tracking-wide text-[#88A97B]">desde {new Date(pueblo.fecha_creacion).getFullYear()}</span>
         </div>
-        <p className="text-sm leading-relaxed text-[#3f5c37] opacity-90">{pueblo.descripcion}</p>
+        <p className="text-sm leading-relaxed text-[#3f5c37] opacity-90 line-clamp-3">{pueblo.descripcion}</p>
         <div className="mt-auto flex items-center justify-between text-sm text-[#2f422a]">
           <span className="inline-flex items-center gap-2 rounded-full bg-[#e6f0dc] px-3 py-1 font-medium">
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#88A97B]" aria-hidden />
@@ -178,8 +178,8 @@ export default function DashboardPage() {
           </button>
         </header>
 
-        <main className="flex flex-col gap-10 sm:gap-12">
-          <section className="relative overflow-hidden rounded-3xl bg-white/95 p-8 shadow-[0_18px_70px_-44px_rgba(68,99,68,0.4)] ring-1 ring-[#e4ecdf] backdrop-blur-sm sm:p-10">
+        <main className="flex flex-col gap-8 sm:gap-10">
+          <section className="relative overflow-hidden rounded-3xl bg-white/95 p-7 shadow-[0_18px_70px_-44px_rgba(68,99,68,0.4)] ring-1 ring-[#e4ecdf] backdrop-blur-sm sm:p-9">
             <div className="absolute -left-12 top-8 h-24 w-24 rounded-full bg-[#d9e7d2] blur-3xl" aria-hidden />
             <div className="absolute -right-14 -bottom-12 h-32 w-32 rounded-full bg-[#88A97B]/30 blur-3xl" aria-hidden />
             <div className="relative grid gap-8 lg:grid-cols-[1.35fr_0.75fr] lg:items-center">
