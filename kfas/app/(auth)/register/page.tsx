@@ -4,9 +4,6 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const backgroundUrl =
-  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000&q=80";
-
 export default function RegisterPage() {
   const router = useRouter();
   const [nombre, setNombre] = useState("");
@@ -62,52 +59,42 @@ export default function RegisterPage() {
   };
 
   return (
-    <div
-      className="relative min-h-screen w-full bg-cover bg-center"
-      style={{ backgroundImage: `url(${backgroundUrl})` }}
-    >
-      <div className="absolute inset-0 bg-white/10" aria-hidden />
-
-      <main className="relative z-10 flex min-h-screen items-center justify-center px-4 py-12 sm:py-16">
-        <div className="w-full max-w-[440px] rounded-[24px] bg-white/92 p-7 shadow-2xl backdrop-blur-md sm:max-w-[480px] sm:p-9">
+    <div className="relative min-h-screen">
+      <main className="relative z-10 flex min-h-screen items-center justify-center px-4 py-10 sm:py-14">
+        <div className="w-full max-w-xl rounded-[28px] bg-white/95 p-8 shadow-2xl ring-1 ring-[#e5ede2] backdrop-blur-sm sm:p-10">
           <header className="mb-5 flex flex-col items-center gap-3 text-center text-gray-800 sm:mb-6">
-            <div className="flex flex-col items-center gap-3">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 shadow-inner">
-                <svg
-                  aria-hidden
-                  viewBox="0 0 64 64"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-9 w-9 text-emerald-600"
-                >
-                  <path
-                    d="M14 36c4-8 16-8 20 0m16 0c-4-8-16-8-20 0m-6-14a6 6 0 11-12 0 6 6 0 0112 0Zm28 0a6 6 0 11-12 0 6 0 0112 0Zm-14-4a6 6 0 11-12 0 6 6 0 0112 0Z"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M10 50c1-8 9-12 15-12s14 4 15 12m8 0c-1-8-9-12-15-12"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-3xl font-semibold text-gray-900">Conecta Pueblos</h1>
-              </div>
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 shadow-inner">
+              <svg
+                aria-hidden
+                viewBox="0 0 64 64"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-9 w-9 text-emerald-600"
+              >
+                <path
+                  d="M14 36c4-8 16-8 20 0m16 0c-4-8-16-8-20 0m-6-14a6 6 0 11-12 0 6 6 0 0112 0Zm28 0a6 6 0 11-12 0 6 0 0112 0Zm-14-4a6 6 0 11-12 0 6 6 0 0112 0Z"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M10 50c1-8 9-12 15-12s14 4 15 12m8 0c-1-8-9-12-15-12"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-3xl font-semibold text-gray-900">Conecta Pueblos</h1>
+              <p className="mt-1 text-sm text-gray-600">Crea tu cuenta para unirte a la comunidad</p>
             </div>
           </header>
 
-          <section className="space-y-6 text-gray-800">
-            <div className="text-center">
-              <h2 className="text-2xl font-semibold text-gray-900">Crea tu cuenta</h2>
-            </div>
-
-            <form className="space-y-5 overflow-y-auto rounded-[18px] bg-white/60 p-4 shadow-inner max-h-[70vh]" onSubmit={handleSubmit}>
+          <section className="space-y-4 text-gray-800">
+            <form className="grid gap-4" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700" htmlFor="nombre">
                   Nombre
@@ -141,38 +128,40 @@ export default function RegisterPage() {
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700" htmlFor="password">
-                  Contraseña
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                  placeholder="••••••••"
-                />
-              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700" htmlFor="password">
+                    Contraseña
+                  </label>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="new-password"
+                    required
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+                    placeholder="••••••••"
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700" htmlFor="confirmPassword">
-                  Confirmación de contraseña
-                </label>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  value={confirmPassword}
-                  onChange={(event) => setConfirmPassword(event.target.value)}
-                  className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                  placeholder="••••••••"
-                />
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700" htmlFor="confirmPassword">
+                    Confirmación de contraseña
+                  </label>
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    autoComplete="new-password"
+                    required
+                    value={confirmPassword}
+                    onChange={(event) => setConfirmPassword(event.target.value)}
+                    className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 shadow-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+                    placeholder="••••••••"
+                  />
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -192,19 +181,21 @@ export default function RegisterPage() {
 
               {error && <p className="text-sm text-red-600">{error}</p>}
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full rounded-2xl bg-[#2e8b57] px-4 py-2.5 text-base font-semibold text-white shadow-md transition hover:bg-[#256f45] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2e8b57] disabled:cursor-not-allowed disabled:opacity-70"
-              >
-                {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
-              </button>
-              <p className="text-center text-sm text-gray-700">
-                ¿Ya tienes cuenta?{" "}
-                <Link href="/login" className="font-semibold text-emerald-700 underline-offset-4 hover:underline">
-                  Inicia sesión
-                </Link>
-              </p>
+              <div className="space-y-3 pt-1">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full rounded-2xl bg-[#2e8b57] px-4 py-3 text-base font-semibold text-white shadow-md transition hover:bg-[#256f45] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2e8b57] disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
+                </button>
+                <p className="text-center text-sm text-gray-700">
+                  ¿Ya tienes cuenta?{" "}
+                  <Link href="/login" className="font-semibold text-emerald-700 underline-offset-4 hover:underline">
+                    Inicia sesión
+                  </Link>
+                </p>
+              </div>
             </form>
           </section>
         </div>

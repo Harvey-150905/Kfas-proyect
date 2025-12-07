@@ -18,7 +18,7 @@ type ProfileClientProps = {
   user?: PublicUser;
 };
 
-const backgroundClass = "bg-gradient-to-br from-[#f9fbf8] via-white to-[#eff4ee]";
+const backgroundClass = "bg-gradient-to-br from-[#fbfbfb] via-white to-[#f5f5f5]";
 
 const activityMocks: Activity[] = [
   {
@@ -171,7 +171,7 @@ export default function ProfileClient({ user }: ProfileClientProps) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(136,169,123,0.18),_transparent_45%),_radial-gradient(circle_at_80%_10%,_rgba(207,227,196,0.28),_transparent_35%),_radial-gradient(circle_at_50%_70%,_rgba(136,169,123,0.18),_transparent_45%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-8 px-4 pb-16 pt-10 sm:px-6 lg:flex-row lg:px-8">
+      <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-7 px-4 pb-14 pt-8 sm:px-6 lg:flex-row lg:px-8">
         <aside className="h-fit rounded-3xl border border-[#d6e2cf] bg-white/85 px-5 py-6 shadow-[0_18px_60px_-38px_rgba(55,84,55,0.45)] backdrop-blur lg:sticky lg:top-8 lg:w-64">
           <div className="mb-6 flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#88A97B] to-[#6f8c64] text-white shadow-md">
@@ -211,7 +211,7 @@ export default function ProfileClient({ user }: ProfileClientProps) {
         </aside>
 
         <main className="flex flex-1 flex-col gap-6">
-          <section className="relative overflow-hidden rounded-3xl border border-[#d6e2cf] bg-white/90 p-6 shadow-[0_18px_70px_-36px_rgba(68,99,68,0.55)] backdrop-blur-sm sm:p-8">
+          <section className="relative overflow-hidden rounded-3xl border border-[#d6e2cf] bg-white/90 p-6 shadow-[0_18px_70px_-36px_rgba(68,99,68,0.55)] backdrop-blur-sm sm:p-7">
             <div className="absolute -left-14 -top-8 h-32 w-32 rounded-full bg-[#d9e7d2] blur-3xl" aria-hidden />
             <div className="absolute -right-14 -bottom-14 h-36 w-36 rounded-full bg-[#88A97B]/25 blur-3xl" aria-hidden />
             <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -266,7 +266,7 @@ export default function ProfileClient({ user }: ProfileClientProps) {
           </section>
 
           <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-3xl border border-[#d6e2cf] bg-white/90 p-6 shadow-[0_18px_70px_-44px_rgba(36,55,40,0.55)]">
+            <div className="rounded-3xl border border-[#d6e2cf] bg-white/90 p-5 shadow-[0_18px_70px_-44px_rgba(36,55,40,0.55)]">
               <div className="mb-6 flex items-start justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.18em] text-[#6f8c64]">Información personal</p>
@@ -393,7 +393,9 @@ export default function ProfileClient({ user }: ProfileClientProps) {
                             />
                           </svg>
                         </span>
-                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#6f8c64]">{item.label}</p>
+                        <p className="text-[11px] font-semibold uppercase leading-tight tracking-[0.16em] text-[#6f8c64] whitespace-normal">
+                          {item.label}
+                        </p>
                       </div>
                       <p className="text-3xl font-bold text-[#243728]">{item.value}</p>
                     </div>
@@ -424,7 +426,7 @@ export default function ProfileClient({ user }: ProfileClientProps) {
                         <Image src={activity.imagen} alt={activity.titulo} fill className="object-cover" />
                       </span>
                       <div className="flex-1">
-                        <p className="text-sm font-semibold text-[#243728]">{activity.titulo}</p>
+                        <p className="text-sm font-semibold text-[#243728] line-clamp-2">{activity.titulo}</p>
                         <p className="text-xs text-[#3f5c37]">{activity.fecha} · {activity.ubicacion}</p>
                       </div>
                       {statusBadge(activity.estado)}
@@ -469,8 +471,8 @@ export default function ProfileClient({ user }: ProfileClientProps) {
                       </div>
                     </div>
                     <div className="flex flex-col gap-3 p-5 text-[#243728]">
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-xl font-semibold">{activity.titulo}</h4>
+                      <div className="flex items-center justify-between gap-3">
+                        <h4 className="text-xl font-semibold line-clamp-2">{activity.titulo}</h4>
                         {statusBadge(activity.estado)}
                       </div>
                       <p className="flex items-center gap-2 text-sm text-[#3f5c37]">

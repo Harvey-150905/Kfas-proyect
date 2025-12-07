@@ -10,6 +10,6 @@ export default async function ProtectedLayout({ children }: { children: ReactNod
     redirect("/login");
   }
 
-  return <>{children}</>;
+  return <div className="min-h-screen bg-white">{children}</div>;
 }
 
