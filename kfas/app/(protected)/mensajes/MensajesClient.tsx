@@ -93,7 +93,7 @@ export default function MensajesClient() {
         </header>
 
         <div className="grid flex-1 gap-4 rounded-3xl bg-white/80 p-3 shadow-[0_18px_60px_-46px_rgba(55,84,55,0.35)] ring-1 ring-[#e2eadf] md:grid-cols-[340px_1fr]">
-          {showList && (
+          {showList && selected &&(
             <div className="flex flex-col gap-3 rounded-2xl bg-[#f7faf5] p-3 ring-1 ring-[#e3ebdf]">
               <div className="flex items-center justify-between gap-2 px-2">
                 <h2 className="text-sm font-semibold text-[#2f4332]">Conversaciones</h2>
@@ -139,7 +139,7 @@ export default function MensajesClient() {
             </div>
           )}
 
-          {showChat && (
+          {showChat && selected && (
             <div className="flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-[#e3ebdf]">
               <div className="flex items-center justify-between gap-3 border-b border-[#edf3eb] px-4 py-3">
                 {isMobileView && (

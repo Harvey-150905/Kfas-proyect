@@ -139,12 +139,18 @@ export default function NotificacionesClient() {
 
 function NotificationRow({ notification }: { notification: NotificationItem }) {
   const icon = iconFor(notification.type);
-  const Wrapper = notification.href ? Link : "div";
-  const wrapperProps = notification.href ? { href: notification.href } : {};
+
+  const Wrapper: React.ElementType =
+    notification.href ? Link : "div";
+
+  const wrapperProps = notification.href
+    ? { href: notification.href }
+    : {};
+
 
   return (
-    <Wrapper
-      {...(wrapperProps as never)}
+    <Wrapper  
+      {...wrapperProps }
       className={`group flex items-start gap-3 rounded-2xl border px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-lg ${
         notification.read ? "border-[#e7efe4] bg-white" : "border-[#d7e6d4] bg-[#f5f9f3]"
       }`}

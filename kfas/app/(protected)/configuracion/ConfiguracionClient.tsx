@@ -578,7 +578,12 @@ function DeleteAccount({ onToast }: { onToast: (toast: Toast) => void }) {
       <h2 className="text-lg font-semibold text-[#7a2f2f]">Eliminar cuenta</h2>
       <p className="mt-1 text-sm text-[#8a3a3a]">Esta acción es permanente. Se eliminarán tu perfil, tus actividades creadas y tu historial.</p>
       <div className="mt-4 space-y-3">
-        <InputField label="Escribe \"ELIMINAR\" para continuar" value={confirm} onChange={setConfirm} />
+       <InputField
+  label='Escribe "ELIMINAR" para continuar'
+  value={confirm}
+  onChange={setConfirm}
+/>
+
         <button
           type="button"
           onClick={handleDelete}

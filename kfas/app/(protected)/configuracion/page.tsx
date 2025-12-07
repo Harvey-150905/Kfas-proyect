@@ -5,7 +5,7 @@ import ConfiguracionClient from "./ConfiguracionClient";
 
 export default async function ConfiguracionPage() {
   const cookieStore = cookies();
-  const session = cookieStore.get("conecta_auth");
+  const session = (await cookieStore).get("conecta_auth");
 
   if (!session && process.env.ALLOW_UNAUTH_VIEW !== "true") {
     redirect("/login");

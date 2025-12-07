@@ -4,7 +4,7 @@ import NotificacionesClient from "./NotificacionesClient";
 
 export default async function NotificacionesPage() {
   const cookieStore = cookies();
-  const session = cookieStore.get("conecta_auth");
+  const session = (await cookieStore).get("conecta_auth");
 
   if (!session && process.env.ALLOW_UNAUTH_VIEW !== "true") {
     redirect("/login");
