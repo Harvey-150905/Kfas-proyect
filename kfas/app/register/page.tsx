@@ -4,9 +4,6 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const backgroundUrl =
-  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000&q=80";
-
 export default function RegisterPage() {
   const router = useRouter();
   const [nombre, setNombre] = useState("");
@@ -62,19 +59,12 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f9f9f9]">
-      <div className="relative h-48 w-full overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#e7f1e7] via-[#f2f7f2] to-white" aria-hidden />
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-45"
-          style={{ backgroundImage: `url(${backgroundUrl})` }}
-          aria-hidden
-        />
-      </div>
+    <div className="relative min-h-screen bg-[#f8f9f8]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(136,169,123,0.12),_transparent_40%),_radial-gradient(circle_at_80%_12%,_rgba(207,227,196,0.22),_transparent_36%),_radial-gradient(circle_at_50%_70%,_rgba(136,169,123,0.12),_transparent_42%)]" aria-hidden />
 
-      <main className="relative z-10 -mt-16 flex min-h-[70vh] items-center justify-center px-4 pb-14 pt-4 sm:pt-6">
-        <div className="w-full max-w-4xl rounded-3xl bg-white/95 p-6 shadow-2xl ring-1 ring-[#e5ede2] backdrop-blur-sm sm:p-8 lg:p-10">
-          <header className="mb-6 flex flex-col items-center gap-3 text-center text-gray-800 sm:mb-7">
+      <main className="relative z-10 flex min-h-screen items-center justify-center px-4 py-10 sm:py-14">
+        <div className="w-full max-w-xl rounded-[28px] bg-white/95 p-8 shadow-2xl ring-1 ring-[#e5ede2] backdrop-blur-sm sm:p-10">
+          <header className="mb-5 flex flex-col items-center gap-3 text-center text-gray-800 sm:mb-6">
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 shadow-inner">
               <svg
                 aria-hidden
@@ -101,12 +91,12 @@ export default function RegisterPage() {
             </div>
             <div>
               <h1 className="text-3xl font-semibold text-gray-900">Conecta Pueblos</h1>
-              <p className="mt-2 text-sm text-gray-600">Crea tu cuenta para unirte a la comunidad</p>
+              <p className="mt-1 text-sm text-gray-600">Crea tu cuenta para unirte a la comunidad</p>
             </div>
           </header>
 
-          <section className="space-y-5 text-gray-800">
-            <form className="grid gap-4 sm:gap-5" onSubmit={handleSubmit}>
+          <section className="space-y-4 text-gray-800">
+            <form className="grid gap-4" onSubmit={handleSubmit}>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700" htmlFor="nombre">
                   Nombre
@@ -193,7 +183,7 @@ export default function RegisterPage() {
 
               {error && <p className="text-sm text-red-600">{error}</p>}
 
-              <div className="space-y-4 pt-2">
+              <div className="space-y-3 pt-1">
                 <button
                   type="submit"
                   disabled={isSubmitting}

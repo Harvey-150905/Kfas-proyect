@@ -216,8 +216,8 @@ function UserMenu({ user }: { user?: PublicUser }) {
 }
 function ActivityCard({ actividad }: { actividad: Activity }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-[#e2eadf] bg-white shadow-[0_22px_75px_-52px_rgba(36,55,40,0.65)] transition hover:-translate-y-1 hover:shadow-[0_30px_110px_-60px_rgba(36,55,40,0.7)]">
-      <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-[4/3]">
+    <article className="group flex h-full min-h-[420px] flex-col overflow-hidden rounded-[26px] border border-[#e2eadf] bg-white shadow-[0_22px_75px_-52px_rgba(36,55,40,0.65)] transition hover:-translate-y-1 hover:shadow-[0_30px_110px_-60px_rgba(36,55,40,0.7)] sm:min-h-[440px]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[16/10]">
         <Image
           src={actividad.imagen}
           alt={actividad.titulo}
@@ -226,7 +226,7 @@ function ActivityCard({ actividad }: { actividad: Activity }) {
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           priority={false}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#142118]/75 via-[#111b14]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#142118]/80 via-[#111b14]/25 to-transparent" />
         <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-[#2f4332] shadow-md">
           <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#89a67e]" aria-hidden />
           {actividad.categoria}
@@ -242,7 +242,7 @@ function ActivityCard({ actividad }: { actividad: Activity }) {
             <p className="text-xs uppercase tracking-[0.16em] text-[#6b8568]">
               {actividad.fecha} · {actividad.hora}
             </p>
-            <h3 className="text-xl font-semibold text-[#1f3024] line-clamp-2">{actividad.titulo}</h3>
+            <h3 className="text-xl font-semibold text-[#1f3024] leading-snug line-clamp-2">{actividad.titulo}</h3>
             <p className="text-sm leading-relaxed text-[#304635] opacity-90 line-clamp-3">{actividad.descripcion}</p>
           </div>
         </div>

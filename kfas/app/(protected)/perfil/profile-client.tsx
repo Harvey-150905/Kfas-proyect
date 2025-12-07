@@ -393,7 +393,9 @@ export default function ProfileClient({ user }: ProfileClientProps) {
                             />
                           </svg>
                         </span>
-                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#6f8c64]">{item.label}</p>
+                        <p className="text-[11px] font-semibold uppercase leading-tight tracking-[0.16em] text-[#6f8c64] whitespace-normal">
+                          {item.label}
+                        </p>
                       </div>
                       <p className="text-3xl font-bold text-[#243728]">{item.value}</p>
                     </div>
