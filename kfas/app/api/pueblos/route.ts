@@ -1,4 +1,6 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { parseSessionToken } from "../../../lib/auth";
 import { createPueblo, getPueblos } from "../../../lib/pueblos";
 
 export async function GET() {
@@ -8,6 +10,12 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const session = cookies().get("conecta_auth");
+    const parsed = session?.value ? parseSessionToken(session.value) : null;
+    if (!parsed) {
+      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+    }
+
     const body = await request.json();
     if (!body?.nombre || !body?.descripcion || !body?.imagen_url || body.latitud === undefined || body.longitud === undefined) {
       return NextResponse.json({ error: "Datos incompletos" }, { status: 400 });

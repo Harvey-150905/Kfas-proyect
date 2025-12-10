@@ -1,28 +1,24 @@
 import { NextResponse } from "next/server";
-import { createUser, findUserByEmail } from "../../../../lib/users";
+import { auth } from "@/lib/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from "@/lib/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
+  const { email, password, nombre } = await req.json();
+
   try {
-    const body = await request.json();
-    const { nombre, email, password, confirmPassword, pueblo } = body ?? {};
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-    if (!nombre || !email || !password || !confirmPassword) {
-      return NextResponse.json({ error: "Todos los campos obligatorios deben completarse" }, { status: 400 });
-    }
+    await setDoc(doc(db, "usuarios", cred.user.uid), {
+      nombre,
+      email: email.toLowerCase(),
+      creado: new Date(),
+    });
 
-    if (password !== confirmPassword) {
-      return NextResponse.json({ error: "Las contraseñas no coinciden" }, { status: 400 });
-    }
-
-    const existing = await findUserByEmail(email);
-    if (existing) {
-      return NextResponse.json({ error: "Ya existe una cuenta con este email" }, { status: 409 });
-    }
-
-    const newUser = await createUser({ nombre, email, password, pueblo });
-
-    return NextResponse.json({ user: newUser }, { status: 201 });
-  } catch (error) {
-    return NextResponse.json({ error: (error as Error).message }, { status: 500 });
+    return NextResponse.json({ ok: true });
+  } catch (err: any) {
+    console.error(err);
+    return NextResponse.json({ ok: false, error: err.code }, { status: 400 });
   }
 }

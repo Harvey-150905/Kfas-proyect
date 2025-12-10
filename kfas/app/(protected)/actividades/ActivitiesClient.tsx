@@ -23,6 +23,9 @@ type ActivitiesClientProps = {
   user?: PublicUser;
 };
 
+
+
+
 const activities: Activity[] = [
   {
     id: "huerto",
@@ -70,9 +73,9 @@ const activities: Activity[] = [
 
 const shortcuts = [
   { label: "Inicio", href: "/actividades", icon: "home" },
-  { label: "Descubrir", href: "#descubrir", icon: "sparkles" },
-  { label: "Mensajes", href: "#mensajes", icon: "chat" },
-  { label: "Tus pueblos", href: "#tus-pueblos", icon: "map" },
+  { label: "Descubrir", href: "/descubrir", icon: "sparkles" },
+  { label: "Mensajes", href: "/mensajes", icon: "chat" },
+  { label: "Tus pueblos", href: "/tus-pueblos", icon: "map" },
 ];
 
 const pueblosDelUsuario = [
@@ -258,12 +261,18 @@ function ActivityCard({ actividad }: { actividad: Activity }) {
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
-            <button className="rounded-full border border-[#cfe0c9] bg-white px-4 py-2 text-xs font-semibold text-[#2f4332] transition hover:-translate-y-0.5 hover:shadow-md">
+            <Link
+              href={`/actividad/${actividad.id}`}
+              className="rounded-full border border-[#cfe0c9] bg-white px-4 py-2 text-xs font-semibold text-[#2f4332] transition hover:-translate-y-0.5 hover:shadow-md"
+            >
               Me interesa
-            </button>
-            <button className="rounded-full bg-gradient-to-r from-[#89a67e] to-[#5f7d53] px-4 py-2 text-xs font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg">
+            </Link>
+            <Link
+              href={`/actividad/${actividad.id}`}
+              className="rounded-full bg-gradient-to-r from-[#89a67e] to-[#5f7d53] px-4 py-2 text-xs font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+            >
               Participar
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -277,7 +286,7 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
 
   return (
     <div className="min-h-screen bg-[#f9f9f9] text-[#253829]">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:px-10 xl:max-w-[1280px] xl:px-12">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:px-10 xl:max-w-[1280px] xl:px-12 min-w-0">
         <aside className="hidden w-[280px] shrink-0 space-y-4 lg:block">
           <div className="overflow-hidden rounded-[26px] bg-white/85 p-5 shadow-[0_25px_80px_-60px_rgba(42,74,41,0.55)] backdrop-blur">
             <div className="mb-4 flex items-center gap-3 rounded-2xl bg-[#ecf3e9] px-3 py-2">
@@ -313,22 +322,23 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
             </div>
             <div className="space-y-3">
               {pueblosDelUsuario.map((pueblo) => (
-                <div
+                <Link
                   key={pueblo.id}
-                  className="flex items-center justify-between rounded-2xl bg-gradient-to-r from-[#f1f6ef] to-[#e6efe2] px-4 py-3 text-sm text-[#2c3f30] shadow-inner"
+                  href={`/pueblo/${pueblo.id}`}
+                  className="flex items-center justify-between rounded-2xl bg-gradient-to-r from-[#f1f6ef] to-[#e6efe2] px-4 py-3 text-sm text-[#2c3f30] shadow-inner transition hover:-translate-y-0.5 hover:shadow-md"
                 >
                   <div className="space-y-0.5">
                     <p className="font-semibold">{pueblo.nombre}</p>
                     <p className="text-xs text-[#5e765d]">{pueblo.miembros} personas cerca</p>
                   </div>
                   <span className="h-2.5 w-2.5 rounded-full bg-[#89a67e]" aria-hidden />
-                </div>
+                </Link>
               ))}
             </div>
           </div>
         </aside>
 
-        <section className="flex-1 space-y-6">
+        <section className="flex-1 space-y-6 min-w-0">
           <header className="flex flex-col gap-3 rounded-[26px] bg-white/90 px-5 py-4 shadow-[0_25px_90px_-60px_rgba(42,74,41,0.5)] backdrop-blur md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#89a67e] to-[#5f7d53] text-lg font-semibold text-white shadow-md">
@@ -359,8 +369,8 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
               </div>
 
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
+                <Link
+                  href="/notificaciones"
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-[#edf3ea] text-[#2f4332] shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                   aria-label="Notificaciones"
                 >
@@ -378,9 +388,9 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
                       strokeLinecap="round"
                     />
                   </svg>
-                </button>
-                <button
-                  type="button"
+                </Link>
+                <Link
+                  href="/mensajes"
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-[#edf3ea] text-[#2f4332] shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                   aria-label="Mensajes"
                 >
@@ -393,7 +403,7 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
                       strokeLinejoin="round"
                     />
                   </svg>
-                </button>
+                </Link>
                 <UserMenu user={user} />
               </div>
             </div>
@@ -412,9 +422,12 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
 
               <div className="flex items-center justify-between px-1">
                 <h2 className="text-xl font-semibold text-[#243728]">Actividades destacadas</h2>
-                <button className="rounded-full bg-[#e4eee0] px-4 py-2 text-xs font-semibold text-[#2f4332] transition hover:-translate-y-0.5 hover:shadow-md">
+                <Link
+                  href="/crear-actividad"
+                  className="rounded-full bg-[#e4eee0] px-4 py-2 text-xs font-semibold text-[#2f4332] transition hover:-translate-y-0.5 hover:shadow-md"
+                >
                   Crear actividad
-                </button>
+                </Link>
               </div>
 
               <div className="grid gap-5">
@@ -443,9 +456,9 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
                 <p className="mt-2 text-sm text-[#304635] leading-relaxed">
                   Describe tu idea, añade fecha, hora y el pueblo anfitrión. La comunidad podrá sumarse al instante.
                 </p>
-                <button className="mt-4 w-full rounded-full bg-gradient-to-r from-[#89a67e] to-[#5f7d53] px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl">
+                <Link href="/publicar" className="mt-4 block w-full rounded-full bg-gradient-to-r from-[#89a67e] to-[#5f7d53] px-4 py-3 text-center text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl">
                   Crear publicación
-                </button>
+                </Link>
               </div>
 
               <div className="overflow-hidden rounded-[26px] bg-white/92 p-5 shadow-[0_25px_90px_-60px_rgba(42,74,41,0.5)]">
@@ -477,9 +490,12 @@ export default function ActivitiesClient({ user }: ActivitiesClientProps) {
                 <p className="mt-2 text-sm text-white/90">
                   Completa tu perfil y añade una foto para recibir propuestas cercanas y conectar con más vecinas.
                 </p>
-                <button className="mt-4 w-full rounded-full bg-white/90 px-4 py-3 text-sm font-semibold text-[#2f4332] shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl">
+                <Link
+                  href="/completar-perfil"
+                  className="mt-4 block w-full rounded-full bg-white/90 px-4 py-3 text-center text-sm font-semibold text-[#2f4332] shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
+                >
                   Completar perfil
-                </button>
+                </Link>
               </div>
             </aside>
           </div>

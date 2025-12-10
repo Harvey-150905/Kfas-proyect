@@ -1,12 +1,19 @@
-import type { ReactNode } from "react";
+import { ReactNode } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { db } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 export default async function ProtectedLayout({ children }: { children: ReactNode }) {
   const cookieStore = await cookies();
-  const session = cookieStore.get("conecta_auth");
+  const uid = cookieStore.get("conecta_auth")?.value;  // FIX
 
-  if (!session && process.env.ALLOW_UNAUTH_VIEW !== "true") {
+  if (!uid) {
+    redirect("/login");
+  }
+
+  const snap = await getDoc(doc(db, "usuarios", uid));
+  if (!snap.exists()) {
     redirect("/login");
   }
 

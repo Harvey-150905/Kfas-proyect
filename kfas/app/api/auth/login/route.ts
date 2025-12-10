@@ -1,30 +1,27 @@
 import { NextResponse } from "next/server";
-import { validateCredentials } from "../../../../lib/users";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
+  const { email, password } = await req.json();
+
   try {
-    const body = await request.json();
-    const { email, password } = body ?? {};
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+    const token = await cred.user.getIdToken();
 
-    if (!email || !password) {
-      return NextResponse.json({ error: "Ingresa tus credenciales" }, { status: 400 });
-    }
+    const res = NextResponse.json({ ok: true });
 
-    const user = await validateCredentials(email, password);
-
-    if (!user) {
-      return NextResponse.json({ error: "Email o contraseña incorrectos" }, { status: 401 });
-    }
-
-    const response = NextResponse.json({ user }, { status: 200 });
-    response.cookies.set("conecta_auth", user.id, {
-      httpOnly: false,
+    // cookie segura
+    res.cookies.set("conecta_uid", cred.user.uid, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
       path: "/",
-      maxAge: 60 * 60 * 24,
     });
 
-    return response;
-  } catch (error) {
-    return NextResponse.json({ error: (error as Error).message }, { status: 500 });
+    return res;
+  } catch (err: any) {
+    console.error(err);
+    return NextResponse.json({ ok: false, error: err.code }, { status: 400 });
   }
 }

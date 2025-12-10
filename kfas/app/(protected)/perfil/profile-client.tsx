@@ -52,9 +52,9 @@ const activityMocks: Activity[] = [
 
 const sidebarLinks = [
   { label: "Perfil", href: "/perfil", icon: "user" },
-  { label: "Configuración", href: "#configuracion", icon: "settings" },
-  { label: "Seguridad", href: "#seguridad", icon: "lock" },
-  { label: "Notificaciones", href: "#notificaciones", icon: "bell" },
+  { label: "Configuración", href: "/configuracion", icon: "settings" },
+  { label: "Seguridad", href: "/seguridad", icon: "lock" },
+  { label: "Notificaciones", href: "/notificaciones", icon: "bell" },
   { label: "Cerrar sesión", href: "/login", icon: "logout" },
 ];
 
@@ -247,7 +247,7 @@ export default function ProfileClient({ user }: ProfileClientProps) {
                   {editing ? "Cerrar edición" : "Editar perfil"}
                 </button>
                 <Link
-                  href="#configuracion"
+                  href="/configuracion"
                   className="inline-flex items-center gap-2 rounded-full border border-[#cddcc6] bg-white/80 px-4 py-2 text-sm font-semibold text-[#2f422a] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#eef3ea]"
                 >
                   <svg aria-hidden viewBox="0 0 24 24" fill="none" className="h-5 w-5 text-[#5f7d53]">
@@ -410,7 +410,7 @@ export default function ProfileClient({ user }: ProfileClientProps) {
                     <h3 className="text-lg font-semibold text-[#243728]">Actividad reciente</h3>
                   </div>
                   <Link
-                    href="#actividades"
+                    href="/actividades"
                     className="text-sm font-semibold text-[#2f8063] underline-offset-4 transition hover:text-[#1f614c]"
                   >
                     Ver historial

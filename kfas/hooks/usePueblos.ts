@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Pueblo } from "../lib/pueblos";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import type { Pueblo } from "@/lib/pueblos";
 
 type PueblosState = {
   data: Pueblo[];
@@ -13,31 +15,32 @@ export function usePueblos() {
   const [state, setState] = useState<PueblosState>({ data: [], loading: true, error: null });
 
   useEffect(() => {
-    let active = true;
+    const pueblosQuery = query(collection(db, "pueblos"), orderBy("nombre"));
+    const unsubscribe = onSnapshot(
+      pueblosQuery,
+      (snapshot) => {
+        const data = snapshot.docs.map((doc) => {
+          const d = doc.data() as any;
+          return {
+            id: doc.id,
+            nombre: d.nombre,
+            descripcion: d.descripcion,
+            distancia_km: d.distancia_km ?? null,
+            imagen_url: d.imagen_url,
+            latitud: Number(d.latitud),
+            longitud: Number(d.longitud),
+            fecha_creacion: d.fecha_creacion?.toDate?.().toISOString?.() ?? new Date().toISOString(),
+          } as Pueblo;
+        });
+        setState({ data, loading: false, error: null });
+      },
+      (error) => {
+        setState({ data: [], loading: false, error: error.message });
+      },
+    );
 
-    const fetchPueblos = async () => {
-      setState((prev) => ({ ...prev, loading: true, error: null }));
-      try {
-        const response = await fetch("/api/pueblos", { cache: "no-store" });
-        if (!response.ok) {
-          throw new Error("No se pudieron cargar los pueblos");
-        }
-        const payload = await response.json();
-        if (!active) return;
-        setState({ data: payload.pueblos ?? [], loading: false, error: null });
-      } catch (error) {
-        if (!active) return;
-        setState({ data: [], loading: false, error: (error as Error).message });
-      }
-    };
-
-    fetchPueblos();
-
-    return () => {
-      active = false;
-    };
+    return () => unsubscribe();
   }, []);
 
   return state;
 }
-

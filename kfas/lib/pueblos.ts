@@ -1,5 +1,17 @@
-import { promises as fs } from "fs";
-import path from "path";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  query,
+  serverTimestamp,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "./firebase";
 
 export type Pueblo = {
   id: string;
@@ -12,84 +24,21 @@ export type Pueblo = {
   fecha_creacion: string;
 };
 
-const dataDir = path.join(process.cwd(), "data");
-const dataFile = path.join(dataDir, "pueblos.json");
-
-const seedData: Pueblo[] = [
-  {
-    id: "prades",
-    nombre: "Prades",
-    descripcion: "Rincones de piedra roja y bosques de pino que perfuman el aire en la sierra de Prades.",
-    distancia_km: 18,
-    imagen_url:
-      "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1200&q=80",
-    latitud: 41.3089,
-    longitud: 1.0183,
-    fecha_creacion: new Date().toISOString(),
-  },
-  {
-    id: "besalu",
-    nombre: "Besalú",
-    descripcion: "Puentes medievales y calles empedradas que conectan historias entre el Fluvià y el campo.",
-    distancia_km: 42,
-    imagen_url:
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
-    latitud: 42.1983,
-    longitud: 2.6975,
-    fecha_creacion: new Date().toISOString(),
-  },
-  {
-    id: "rupit",
-    nombre: "Rupit i Pruit",
-    descripcion: "Casas colgantes, pasarelas de madera y cascadas que guardan la calma del Collsacabra.",
-    distancia_km: 56,
-    imagen_url:
-      "https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=1200&q=80",
-    latitud: 42.0242,
-    longitud: 2.4665,
-    fecha_creacion: new Date().toISOString(),
-  },
-  {
-    id: "valldeflores",
-    nombre: "Vall de Núria",
-    descripcion: "Praderas verdes, cremallera y montañas suaves que abrazan romerías y tradiciones de altura.",
-    distancia_km: 95,
-    imagen_url:
-      "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1200&q=80",
-    latitud: 42.3876,
-    longitud: 2.162,
-    fecha_creacion: new Date().toISOString(),
-  },
-];
-
-async function ensureDataFile(): Promise<void> {
-  try {
-    await fs.access(dataFile);
-  } catch {
-    await fs.mkdir(dataDir, { recursive: true });
-    await fs.writeFile(dataFile, JSON.stringify(seedData, null, 2), "utf8");
-  }
-}
-
-async function readData(): Promise<Pueblo[]> {
-  await ensureDataFile();
-  const content = await fs.readFile(dataFile, "utf8");
-  const data = JSON.parse(content) as Pueblo[];
-  return data;
-}
-
-async function saveData(pueblos: Pueblo[]): Promise<void> {
-  await fs.writeFile(dataFile, JSON.stringify(pueblos, null, 2), "utf8");
-}
+const pueblosCol = collection(db, "pueblos");
+const actividadesSub = (puebloId: string) => collection(db, "pueblos", puebloId, "actividades");
+const mensajesSub = (puebloId: string) => collection(db, "pueblos", puebloId, "mensajes");
 
 export async function getPueblos(): Promise<Pueblo[]> {
-  const pueblos = await readData();
-  return pueblos.sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+  const pueblosQuery = query(pueblosCol, orderBy("nombre"));
+  const snapshot = await getDocs(pueblosQuery);
+  return snapshot.docs.map((doc) => puebloFromDoc(doc.id, doc.data()));
 }
 
 export async function getPuebloById(id: string): Promise<Pueblo | undefined> {
-  const pueblos = await readData();
-  return pueblos.find((pueblo) => pueblo.id === id);
+  const ref = doc(pueblosCol, id);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return undefined;
+  return puebloFromDoc(snap.id, snap.data());
 }
 
 export type CreatePuebloInput = {
@@ -102,20 +51,124 @@ export type CreatePuebloInput = {
 };
 
 export async function createPueblo(input: CreatePuebloInput): Promise<Pueblo> {
-  const pueblos = await readData();
-  const id = input.nombre.toLowerCase().replace(/\s+/g, "-") + "-" + crypto.randomUUID().slice(0, 6);
-  const nuevo: Pueblo = {
-    id,
+  const docRef = await addDoc(pueblosCol, {
     nombre: input.nombre,
     descripcion: input.descripcion,
     distancia_km: input.distancia_km ?? null,
     imagen_url: input.imagen_url,
     latitud: input.latitud,
     longitud: input.longitud,
-    fecha_creacion: new Date().toISOString(),
-  };
-
-  await saveData([...pueblos, nuevo]);
-  return nuevo;
+    fecha_creacion: serverTimestamp(),
+  });
+  const created = await getDoc(docRef);
+  return puebloFromDoc(created.id, created.data());
 }
 
+export async function updatePueblo(id: string, data: Partial<CreatePuebloInput>): Promise<void> {
+  const ref = doc(pueblosCol, id);
+  await updateDoc(ref, data);
+}
+
+export async function deletePueblo(id: string): Promise<void> {
+  const ref = doc(pueblosCol, id);
+  await deleteDoc(ref);
+}
+
+export type Actividad = {
+  id: string;
+  titulo: string;
+  descripcion: string;
+  fecha: string;
+  hora?: string | null;
+  categoria?: string | null;
+  lugar?: string | null;
+  organizador?: string | null;
+  imagen?: string | null;
+  avatar?: string | null;
+  fecha_creacion: string;
+};
+
+export type CreateActividadInput = Omit<Actividad, "id" | "fecha_creacion">;
+
+export async function getActividades(puebloId: string): Promise<Actividad[]> {
+  const actividadesQuery = query(actividadesSub(puebloId), orderBy("fecha_creacion", "desc"));
+  const snapshot = await getDocs(actividadesQuery);
+  return snapshot.docs.map((doc) => actividadFromDoc(doc.id, doc.data()));
+}
+
+export async function createActividad(puebloId: string, data: CreateActividadInput): Promise<Actividad> {
+  const docRef = await addDoc(actividadesSub(puebloId), {
+    ...data,
+    fecha_creacion: serverTimestamp(),
+  });
+  const created = await getDoc(docRef);
+  return actividadFromDoc(created.id, created.data());
+}
+
+export type Mensaje = {
+  id: string;
+  contenido: string;
+  autor?: string | null;
+  fecha_creacion: string;
+};
+
+export type CreateMensajeInput = Omit<Mensaje, "id" | "fecha_creacion">;
+
+export async function getMensajes(puebloId: string): Promise<Mensaje[]> {
+  const mensajesQuery = query(mensajesSub(puebloId), orderBy("fecha_creacion", "desc"));
+  const snapshot = await getDocs(mensajesQuery);
+  return snapshot.docs.map((doc) => mensajeFromDoc(doc.id, doc.data()));
+}
+
+export async function createMensaje(puebloId: string, data: CreateMensajeInput): Promise<Mensaje> {
+  const docRef = await addDoc(mensajesSub(puebloId), { ...data, fecha_creacion: serverTimestamp() });
+  const created = await getDoc(docRef);
+  return mensajeFromDoc(created.id, created.data());
+}
+
+function puebloFromDoc(id: string, data: any): Pueblo {
+  return {
+    id,
+    nombre: data.nombre,
+    descripcion: data.descripcion,
+    distancia_km: data.distancia_km ?? null,
+    imagen_url: data.imagen_url,
+    latitud: Number(data.latitud),
+    longitud: Number(data.longitud),
+    fecha_creacion:
+      data.fecha_creacion instanceof Timestamp
+        ? data.fecha_creacion.toDate().toISOString()
+        : data.fecha_creacion ?? new Date().toISOString(),
+  };
+}
+
+function actividadFromDoc(id: string, data: any): Actividad {
+  return {
+    id,
+    titulo: data.titulo,
+    descripcion: data.descripcion,
+    fecha: data.fecha,
+    hora: data.hora ?? null,
+    categoria: data.categoria ?? null,
+    lugar: data.lugar ?? null,
+    organizador: data.organizador ?? null,
+    imagen: data.imagen ?? null,
+    avatar: data.avatar ?? null,
+    fecha_creacion:
+      data.fecha_creacion instanceof Timestamp
+        ? data.fecha_creacion.toDate().toISOString()
+        : data.fecha_creacion ?? new Date().toISOString(),
+  };
+}
+
+function mensajeFromDoc(id: string, data: any): Mensaje {
+  return {
+    id,
+    contenido: data.contenido,
+    autor: data.autor ?? null,
+    fecha_creacion:
+      data.fecha_creacion instanceof Timestamp
+        ? data.fecha_creacion.toDate().toISOString()
+        : data.fecha_creacion ?? new Date().toISOString(),
+  };
+}

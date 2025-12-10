@@ -1,17 +1,18 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { findUserById } from "@/lib/users";
-import ProfileClient from "./profile-client";
+import { db } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 export default async function PerfilPage() {
-  const cookieStore = cookies();
-  const session = (await cookieStore).get("conecta_auth");
+  const uid = (await cookies()).get("conecta_uid")?.value!;
+  const snap = await getDoc(doc(db, "usuarios", uid));
+  const user = snap.data();
 
-  if (!session) {
-    redirect("/login");
-  }
-
-  const user = session?.value ? await findUserById(session.value) : undefined;
-
-  return <ProfileClient user={user} />;
+  return (
+    <div>
+      <h1>Mi Perfil</h1>
+      <p>Nombre: {user?.nombre}</p>
+      <p>Email: {user?.email}</p>
+      <p>Creado: {user?.creado?.toDate?.().toLocaleString()}</p>
+    </div>
+  );
 }

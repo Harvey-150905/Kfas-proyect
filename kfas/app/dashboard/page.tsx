@@ -43,37 +43,39 @@ function HeroBackground() {
 
 function PuebloCard({ pueblo }: { pueblo: Pueblo }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-[22px] border border-[#d6e2cf] bg-white/90 shadow-[0_18px_60px_-38px_rgba(55,84,55,0.45)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_26px_90px_-44px_rgba(55,84,55,0.52)]">
-      <div className="relative h-52 overflow-hidden">
-        <Image
-          src={pueblo.imagen_url}
-          alt={pueblo.nombre}
-          fill
-          sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 90vw"
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-          priority={false}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
-        <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-[#3f5c37] shadow-sm">
-          <span className="inline-block h-2 w-2 rounded-full bg-[#88A97B]" aria-hidden />
-          {formatDistance(pueblo)}
+    <Link href={`/pueblo/${pueblo.id}`} className="group block">
+      <article className="flex flex-col overflow-hidden rounded-[22px] border border-[#d6e2cf] bg-white/90 shadow-[0_18px_60px_-38px_rgba(55,84,55,0.45)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_26px_90px_-44px_rgba(55,84,55,0.52)]">
+        <div className="relative h-52 overflow-hidden">
+          <Image
+            src={pueblo.imagen_url}
+            alt={pueblo.nombre}
+            fill
+            sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 90vw"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            priority={false}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
+          <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-[#3f5c37] shadow-sm">
+            <span className="inline-block h-2 w-2 rounded-full bg-[#88A97B]" aria-hidden />
+            {formatDistance(pueblo)}
+          </div>
         </div>
-      </div>
-      <div className="flex flex-1 flex-col gap-3 p-6">
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold text-[#2f422a]">{pueblo.nombre}</h3>
-          <span className="text-xs uppercase tracking-wide text-[#88A97B]">desde {new Date(pueblo.fecha_creacion).getFullYear()}</span>
+        <div className="flex flex-1 flex-col gap-3 p-6">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-semibold text-[#2f422a]">{pueblo.nombre}</h3>
+            <span className="text-xs uppercase tracking-wide text-[#88A97B]">desde {new Date(pueblo.fecha_creacion).getFullYear()}</span>
+          </div>
+          <p className="text-sm leading-relaxed text-[#3f5c37] opacity-90 line-clamp-3">{pueblo.descripcion}</p>
+          <div className="mt-auto flex items-center justify-between text-sm text-[#2f422a]">
+            <span className="inline-flex items-center gap-2 rounded-full bg-[#e6f0dc] px-3 py-1 font-medium">
+              <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#88A97B]" aria-hidden />
+              Coordenadas
+            </span>
+            <span className="font-semibold text-[#446347]">{pueblo.latitud.toFixed(3)} / {pueblo.longitud.toFixed(3)}</span>
+          </div>
         </div>
-        <p className="text-sm leading-relaxed text-[#3f5c37] opacity-90 line-clamp-3">{pueblo.descripcion}</p>
-        <div className="mt-auto flex items-center justify-between text-sm text-[#2f422a]">
-          <span className="inline-flex items-center gap-2 rounded-full bg-[#e6f0dc] px-3 py-1 font-medium">
-            <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#88A97B]" aria-hidden />
-            Coordenadas
-          </span>
-          <span className="font-semibold text-[#446347]">{pueblo.latitud.toFixed(3)} / {pueblo.longitud.toFixed(3)}</span>
-        </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 }
 
@@ -84,7 +86,7 @@ export default function DashboardPage() {
   const handleJoin = () => {
     const hasSession = document.cookie.includes("conecta_auth=");
     if (hasSession) {
-      router.push("/login");
+      router.push("/actividades");
       return;
     }
     router.push("/register");
@@ -119,7 +121,7 @@ export default function DashboardPage() {
   return (
     <div className={`relative min-h-screen ${backgroundClass} text-[#2f422a]`}>
       <HeroBackground />
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1400px] flex-col px-4 pb-16 pt-8 sm:px-6 lg:px-10 xl:px-12">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1400px] flex-col px-4 pb-16 pt-8 sm:px-6 lg:px-10 xl:px-12 min-w-0">
         <header className="mb-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white/90 px-5 py-4 shadow-[0_15px_50px_-34px_rgba(68,99,68,0.45)] backdrop-blur">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#88A97B] to-[#6f8c64] text-white shadow-md">
@@ -154,10 +156,10 @@ export default function DashboardPage() {
 
           <nav className="flex flex-1 items-center justify-center gap-4 text-sm font-medium text-[#3f5c37] sm:gap-6">
             {[
-              { href: "#", label: "Inicio" },
-              { href: "#pueblos", label: "Pueblos" },
-              { href: "#conecta", label: "Conecta" },
-              { href: "#nosotros", label: "Nosotros" },
+              { href: "/dashboard", label: "Inicio" },
+              { href: "/tus-pueblos", label: "Pueblos" },
+              { href: "/actividades", label: "Conecta" },
+              { href: "/perfil", label: "Nosotros" },
             ].map((item) => (
               <Link
                 key={item.label}
@@ -193,13 +195,13 @@ export default function DashboardPage() {
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
                   <Link
-                    href="#pueblos"
+                    href="/descubrir"
                     className="inline-flex items-center gap-2 rounded-full bg-[#88A97B] px-5 py-3 text-base font-semibold text-white shadow-lg shadow-[rgba(68,99,68,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_40px_-20px_rgba(68,99,68,0.6)]"
                   >
                     Explora comunidades
                   </Link>
                   <Link
-                    href="#conecta"
+                    href="/actividades"
                     className="inline-flex items-center gap-2 rounded-full border border-[#b5c9a8] bg-white/80 px-5 py-3 text-base font-semibold text-[#2f422a] shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                   >
                     Cómo funciona

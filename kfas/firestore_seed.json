@@ -1,0 +1,133 @@
+{
+  "usuarios": {
+    "user1": {
+      "nombre": "Lucía Martínez",
+      "email": "lucia@example.com",
+      "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+      "pueblos": ["prades", "rupit"],
+      "creado": "2025-01-15"
+    },
+    "user2": {
+      "nombre": "Carlos Peña",
+      "email": "carlos@example.com",
+      "avatarUrl": "https://randomuser.me/api/portraits/men/22.jpg",
+      "pueblos": ["besalu"],
+      "creado": "2025-01-13"
+    },
+    "user3": {
+      "nombre": "Ana Torres",
+      "email": "ana@example.com",
+      "avatarUrl": "https://randomuser.me/api/portraits/women/88.jpg",
+      "pueblos": ["olot"],
+      "creado": "2025-01-11"
+    },
+    "user4": {
+      "nombre": "David Serrano",
+      "email": "david@example.com",
+      "avatarUrl": "https://randomuser.me/api/portraits/men/73.jpg",
+      "pueblos": ["prades"],
+      "creado": "2025-01-10"
+    },
+    "user5": {
+      "nombre": "Elena Ruiz",
+      "email": "elena@example.com",
+      "avatarUrl": "https://randomuser.me/api/portraits/women/12.jpg",
+      "pueblos": ["besalu", "olot"],
+      "creado": "2025-01-09"
+    }
+  },
+
+  "pueblos": {
+    "prades": {
+      "nombre": "Prades",
+      "miembros": 138,
+      "descripcion": "Comunidad agrícola en la montaña.",
+      "region": "Cataluña"
+    },
+    "besalu": {
+      "nombre": "Besalú",
+      "miembros": 92,
+      "descripcion": "Pueblo medieval con mucha tradición artesanal.",
+      "region": "Cataluña"
+    },
+    "rupit": {
+      "nombre": "Rupit i Pruit",
+      "miembros": 76,
+      "descripcion": "Pueblo natural rodeado de bosques.",
+      "region": "Cataluña"
+    },
+    "olot": {
+      "nombre": "Olot",
+      "miembros": 210,
+      "descripcion": "Capital de La Garrotxa, tradición volcánica.",
+      "region": "Cataluña"
+    }
+  },
+
+  "actividades": {
+    "huerto": {
+      "id": "huerto",
+      "titulo": "Jornada de Huertos Comunitarios",
+      "categoria": "Agro",
+      "fecha": "2025-01-25",
+      "hora": "09:30",
+      "lugar": "Prades",
+      "organizador": "Colectivo Sembrar",
+      "avatar": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?fit=crop&w=200&q=80",
+      "imagen": "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?fit=crop&w=1600&q=80",
+      "descripcion": "Preparación de bancales comunitarios e intercambio de semillas."
+    },
+    "senderismo": {
+      "id": "senderismo",
+      "titulo": "Ruta suave por el hayedo",
+      "categoria": "Naturaleza",
+      "fecha": "2025-01-29",
+      "hora": "07:30",
+      "lugar": "Rupit i Pruit",
+      "organizador": "Club Camins Blaus",
+      "avatar": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?fit=crop&w=200&q=80",
+      "imagen": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?fit=crop&w=1600&q=80",
+      "descripcion": "Observación de aves, desayuno local y limpieza del sendero."
+    },
+    "bordado": {
+      "id": "bordado",
+      "titulo": "Taller de Bordado Tradicional",
+      "categoria": "Oficios",
+      "fecha": "2025-01-26",
+      "hora": "16:00",
+      "lugar": "Besalú",
+      "organizador": "Artesanas del Fluvià",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=200&q=80",
+      "imagen": "https://images.unsplash.com/photo-1617032213042-09f3b20c8bd3?fit=crop&w=1600&q=80",
+      "descripcion": "Aprende puntadas ancestrales y simbolismos culturales."
+    }
+  },
+
+  "mensajes": {
+    "msg1": {
+      "from": "user1",
+      "to": "user2",
+      "mensaje": "Hola Carlos, ¿vas al taller de bordado?",
+      "fecha": "2025-02-01"
+    },
+    "msg2": {
+      "from": "user3",
+      "to": "user1",
+      "mensaje": "Lucía, ¿me pasas las fotos del huerto?",
+      "fecha": "2025-02-02"
+    }
+  },
+
+  "notificaciones": {
+    "notif1": {
+      "user": "user1",
+      "texto": "Tu actividad 'Huertos Comunitarios' fue actualizada",
+      "fecha": "2025-02-03"
+    },
+    "notif2": {
+      "user": "user2",
+      "texto": "Nuevo evento disponible en Besalú",
+      "fecha": "2025-02-03"
+    }
+  }
+}
